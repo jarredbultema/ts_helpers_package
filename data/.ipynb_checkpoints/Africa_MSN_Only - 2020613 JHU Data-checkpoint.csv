@@ -1,0 +1,433 @@
+﻿Country/Region,Province/State,County/District,UniqueLocation,DataType,Date,Deaths,Deaths_Cumulative,ConfirmedCases,Cases_Cumulative
+Morocco,n/a,n/a,Morocco,Deaths,22-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,23-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,24-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,25-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,26-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,27-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,28-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,29-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,30-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,31-Jan,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,1-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,2-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,3-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,4-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,5-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,6-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,7-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,8-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,9-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,10-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,11-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,12-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,13-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,14-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,15-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,16-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,17-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,18-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,19-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,20-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,21-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,22-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,23-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,24-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,25-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,26-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,27-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,28-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,29-Feb,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,1-Mar,0,0,0,0
+Morocco,n/a,n/a,Morocco,Deaths,2-Mar,0,0,1,1
+Morocco,n/a,n/a,Morocco,Deaths,3-Mar,0,0,0,1
+Morocco,n/a,n/a,Morocco,Deaths,4-Mar,0,0,0,1
+Morocco,n/a,n/a,Morocco,Deaths,5-Mar,0,0,1,2
+Morocco,n/a,n/a,Morocco,Deaths,6-Mar,0,0,0,2
+Morocco,n/a,n/a,Morocco,Deaths,7-Mar,0,0,0,2
+Morocco,n/a,n/a,Morocco,Deaths,8-Mar,0,0,0,2
+Morocco,n/a,n/a,Morocco,Deaths,9-Mar,0,0,0,2
+Morocco,n/a,n/a,Morocco,Deaths,10-Mar,1,1,1,3
+Morocco,n/a,n/a,Morocco,Deaths,11-Mar,0,1,2,5
+Morocco,n/a,n/a,Morocco,Deaths,12-Mar,0,1,1,6
+Morocco,n/a,n/a,Morocco,Deaths,13-Mar,0,1,1,7
+Morocco,n/a,n/a,Morocco,Deaths,14-Mar,0,1,10,17
+Morocco,n/a,n/a,Morocco,Deaths,15-Mar,0,1,11,28
+Morocco,n/a,n/a,Morocco,Deaths,16-Mar,0,1,1,29
+Morocco,n/a,n/a,Morocco,Deaths,17-Mar,1,2,9,38
+Morocco,n/a,n/a,Morocco,Deaths,18-Mar,0,2,11,49
+Morocco,n/a,n/a,Morocco,Deaths,19-Mar,0,2,14,63
+Morocco,n/a,n/a,Morocco,Deaths,20-Mar,1,3,14,77
+Morocco,n/a,n/a,Morocco,Deaths,21-Mar,0,3,19,96
+Morocco,n/a,n/a,Morocco,Deaths,22-Mar,1,4,19,115
+Morocco,n/a,n/a,Morocco,Deaths,23-Mar,0,4,28,143
+Morocco,n/a,n/a,Morocco,Deaths,24-Mar,1,5,27,170
+Morocco,n/a,n/a,Morocco,Deaths,25-Mar,1,6,55,225
+Morocco,n/a,n/a,Morocco,Deaths,26-Mar,5,11,50,275
+Morocco,n/a,n/a,Morocco,Deaths,27-Mar,12,23,70,345
+Morocco,n/a,n/a,Morocco,Deaths,28-Mar,2,25,57,402
+Morocco,n/a,n/a,Morocco,Deaths,29-Mar,1,26,77,479
+Morocco,n/a,n/a,Morocco,Deaths,30-Mar,7,33,77,556
+Morocco,n/a,n/a,Morocco,Deaths,31-Mar,3,36,61,617
+Morocco,n/a,n/a,Morocco,Deaths,1-Apr,3,39,37,654
+Morocco,n/a,n/a,Morocco,Deaths,2-Apr,5,44,54,708
+Morocco,n/a,n/a,Morocco,Deaths,3-Apr,4,48,83,791
+Morocco,n/a,n/a,Morocco,Deaths,4-Apr,11,59,128,919
+Morocco,n/a,n/a,Morocco,Deaths,5-Apr,11,70,102,1021
+Morocco,n/a,n/a,Morocco,Deaths,6-Apr,10,80,99,1120
+Morocco,n/a,n/a,Morocco,Deaths,7-Apr,10,90,64,1184
+Morocco,n/a,n/a,Morocco,Deaths,8-Apr,3,93,91,1275
+Morocco,n/a,n/a,Morocco,Deaths,9-Apr,4,97,99,1374
+Morocco,n/a,n/a,Morocco,Deaths,10-Apr,10,107,74,1448
+Morocco,n/a,n/a,Morocco,Deaths,11-Apr,4,111,97,1545
+Morocco,n/a,n/a,Morocco,Deaths,12-Apr,7,118,116,1661
+Morocco,n/a,n/a,Morocco,Deaths,13-Apr,8,126,102,1763
+Morocco,n/a,n/a,Morocco,Deaths,14-Apr,0,126,125,1888
+Morocco,n/a,n/a,Morocco,Deaths,15-Apr,1,127,136,2024
+Morocco,n/a,n/a,Morocco,Deaths,16-Apr,3,130,259,2283
+Morocco,n/a,n/a,Morocco,Deaths,17-Apr,5,135,281,2564
+Morocco,n/a,n/a,Morocco,Deaths,18-Apr,2,137,121,2685
+Morocco,n/a,n/a,Morocco,Deaths,19-Apr,4,141,170,2855
+Morocco,n/a,n/a,Morocco,Deaths,20-Apr,2,143,191,3046
+Morocco,n/a,n/a,Morocco,Deaths,21-Apr,2,145,163,3209
+Morocco,n/a,n/a,Morocco,Deaths,22-Apr,4,149,237,3446
+Morocco,n/a,n/a,Morocco,Deaths,23-Apr,6,155,122,3568
+Morocco,n/a,n/a,Morocco,Deaths,24-Apr,3,158,190,3758
+Morocco,n/a,n/a,Morocco,Deaths,25-Apr,1,159,139,3897
+Morocco,n/a,n/a,Morocco,Deaths,26-Apr,2,161,168,4065
+Morocco,n/a,n/a,Morocco,Deaths,27-Apr,1,162,55,4120
+Morocco,n/a,n/a,Morocco,Deaths,28-Apr,3,165,132,4252
+Morocco,n/a,n/a,Morocco,Deaths,29-Apr,3,168,69,4321
+Morocco,n/a,n/a,Morocco,Deaths,30-Apr,2,170,102,4423
+Morocco,n/a,n/a,Morocco,Deaths,1-May,1,171,146,4569
+Morocco,n/a,n/a,Morocco,Deaths,2-May,2,173,160,4729
+Morocco,n/a,n/a,Morocco,Deaths,3-May,1,174,174,4903
+Morocco,n/a,n/a,Morocco,Deaths,4-May,5,179,150,5053
+Morocco,n/a,n/a,Morocco,Deaths,5-May,2,181,166,5219
+Morocco,n/a,n/a,Morocco,Deaths,6-May,2,183,189,5408
+Morocco,n/a,n/a,Morocco,Deaths,7-May,0,183,140,5548
+Morocco,n/a,n/a,Morocco,Deaths,8-May,3,186,163,5711
+Morocco,n/a,n/a,Morocco,Deaths,9-May,0,186,199,5910
+Morocco,n/a,n/a,Morocco,Deaths,10-May,2,188,153,6063
+Morocco,n/a,n/a,Morocco,Deaths,11-May,0,188,218,6281
+Morocco,n/a,n/a,Morocco,Deaths,12-May,0,188,137,6418
+Morocco,n/a,n/a,Morocco,Deaths,13-May,0,188,94,6512
+Morocco,n/a,n/a,Morocco,Deaths,14-May,2,190,95,6607
+Morocco,n/a,n/a,Morocco,Deaths,15-May,0,190,45,6652
+Morocco,n/a,n/a,Morocco,Deaths,16-May,2,192,89,6741
+Morocco,n/a,n/a,Morocco,Deaths,17-May,0,192,129,6870
+Morocco,n/a,n/a,Morocco,Deaths,18-May,0,192,82,6952
+Morocco,n/a,n/a,Morocco,Deaths,19-May,1,193,71,7023
+Morocco,n/a,n/a,Morocco,Deaths,20-May,1,194,110,7133
+Morocco,n/a,n/a,Morocco,Deaths,21-May,2,196,78,7211
+Morocco,n/a,n/a,Morocco,Deaths,22-May,1,197,121,7332
+Morocco,n/a,n/a,Morocco,Deaths,23-May,1,198,74,7406
+Morocco,n/a,n/a,Morocco,Deaths,24-May,1,199,27,7433
+Morocco,n/a,n/a,Morocco,Deaths,25-May,1,200,99,7532
+Morocco,n/a,n/a,Morocco,Deaths,26-May,2,202,45,7577
+Morocco,n/a,n/a,Morocco,Deaths,27-May,0,202,24,7601
+Morocco,n/a,n/a,Morocco,Deaths,28-May,0,202,42,7643
+Morocco,n/a,n/a,Morocco,Deaths,29-May,0,202,71,7714
+Morocco,n/a,n/a,Morocco,Deaths,30-May,2,204,66,7780
+Morocco,n/a,n/a,Morocco,Deaths,31-May,1,205,27,7807
+Morocco,n/a,n/a,Morocco,Deaths,1-Jun,0,205,26,7833
+Morocco,n/a,n/a,Morocco,Deaths,2-Jun,1,206,33,7866
+Morocco,n/a,n/a,Morocco,Deaths,3-Jun,0,206,56,7922
+Morocco,n/a,n/a,Morocco,Deaths,4-Jun,2,208,81,8003
+Morocco,n/a,n/a,Morocco,Deaths,5-Jun,0,208,68,8071
+Morocco,n/a,n/a,Morocco,Deaths,6-Jun,0,208,80,8151
+Morocco,n/a,n/a,Morocco,Deaths,7-Jun,0,208,73,8224
+Morocco,n/a,n/a,Morocco,Deaths,8-Jun,0,208,78,8302
+Morocco,n/a,n/a,Morocco,Deaths,9-Jun,2,210,135,8437
+Morocco,n/a,n/a,Morocco,Deaths,10-Jun,1,211,71,8508
+Morocco,n/a,n/a,Morocco,Deaths,11-Jun,0,211,29,8537
+Morocco,n/a,n/a,Morocco,Deaths,12-Jun,1,212,73,8610
+Morocco,n/a,n/a,Morocco,Deaths,13-Jun,0,212,82,8692
+South Africa,n/a,n/a,South Africa,Deaths,22-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,23-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,24-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,25-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,26-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,27-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,28-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,29-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,30-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,31-Jan,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,1-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,2-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,3-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,4-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,5-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,6-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,7-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,8-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,9-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,10-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,11-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,12-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,13-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,14-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,15-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,16-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,17-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,18-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,19-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,20-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,21-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,22-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,23-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,24-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,25-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,26-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,27-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,28-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,29-Feb,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,1-Mar,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,2-Mar,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,3-Mar,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,4-Mar,0,0,0,0
+South Africa,n/a,n/a,South Africa,Deaths,5-Mar,0,0,1,1
+South Africa,n/a,n/a,South Africa,Deaths,6-Mar,0,0,0,1
+South Africa,n/a,n/a,South Africa,Deaths,7-Mar,0,0,0,1
+South Africa,n/a,n/a,South Africa,Deaths,8-Mar,0,0,2,3
+South Africa,n/a,n/a,South Africa,Deaths,9-Mar,0,0,0,3
+South Africa,n/a,n/a,South Africa,Deaths,10-Mar,0,0,4,7
+South Africa,n/a,n/a,South Africa,Deaths,11-Mar,0,0,6,13
+South Africa,n/a,n/a,South Africa,Deaths,12-Mar,0,0,4,17
+South Africa,n/a,n/a,South Africa,Deaths,13-Mar,0,0,7,24
+South Africa,n/a,n/a,South Africa,Deaths,14-Mar,0,0,14,38
+South Africa,n/a,n/a,South Africa,Deaths,15-Mar,0,0,13,51
+South Africa,n/a,n/a,South Africa,Deaths,16-Mar,0,0,11,62
+South Africa,n/a,n/a,South Africa,Deaths,17-Mar,0,0,0,62
+South Africa,n/a,n/a,South Africa,Deaths,18-Mar,0,0,54,116
+South Africa,n/a,n/a,South Africa,Deaths,19-Mar,0,0,34,150
+South Africa,n/a,n/a,South Africa,Deaths,20-Mar,0,0,52,202
+South Africa,n/a,n/a,South Africa,Deaths,21-Mar,0,0,38,240
+South Africa,n/a,n/a,South Africa,Deaths,22-Mar,0,0,34,274
+South Africa,n/a,n/a,South Africa,Deaths,23-Mar,0,0,128,402
+South Africa,n/a,n/a,South Africa,Deaths,24-Mar,0,0,152,554
+South Africa,n/a,n/a,South Africa,Deaths,25-Mar,0,0,155,709
+South Africa,n/a,n/a,South Africa,Deaths,26-Mar,0,0,218,927
+South Africa,n/a,n/a,South Africa,Deaths,27-Mar,1,1,243,1170
+South Africa,n/a,n/a,South Africa,Deaths,28-Mar,0,1,17,1187
+South Africa,n/a,n/a,South Africa,Deaths,29-Mar,1,2,93,1280
+South Africa,n/a,n/a,South Africa,Deaths,30-Mar,1,3,46,1326
+South Africa,n/a,n/a,South Africa,Deaths,31-Mar,2,5,27,1353
+South Africa,n/a,n/a,South Africa,Deaths,1-Apr,0,5,27,1380
+South Africa,n/a,n/a,South Africa,Deaths,2-Apr,0,5,82,1462
+South Africa,n/a,n/a,South Africa,Deaths,3-Apr,4,9,43,1505
+South Africa,n/a,n/a,South Africa,Deaths,4-Apr,0,9,80,1585
+South Africa,n/a,n/a,South Africa,Deaths,5-Apr,2,11,70,1655
+South Africa,n/a,n/a,South Africa,Deaths,6-Apr,1,12,31,1686
+South Africa,n/a,n/a,South Africa,Deaths,7-Apr,1,13,63,1749
+South Africa,n/a,n/a,South Africa,Deaths,8-Apr,5,18,96,1845
+South Africa,n/a,n/a,South Africa,Deaths,9-Apr,0,18,89,1934
+South Africa,n/a,n/a,South Africa,Deaths,10-Apr,6,24,69,2003
+South Africa,n/a,n/a,South Africa,Deaths,11-Apr,1,25,25,2028
+South Africa,n/a,n/a,South Africa,Deaths,12-Apr,0,25,145,2173
+South Africa,n/a,n/a,South Africa,Deaths,13-Apr,2,27,99,2272
+South Africa,n/a,n/a,South Africa,Deaths,14-Apr,0,27,143,2415
+South Africa,n/a,n/a,South Africa,Deaths,15-Apr,7,34,91,2506
+South Africa,n/a,n/a,South Africa,Deaths,16-Apr,14,48,99,2605
+South Africa,n/a,n/a,South Africa,Deaths,17-Apr,2,50,178,2783
+South Africa,n/a,n/a,South Africa,Deaths,18-Apr,2,52,251,3034
+South Africa,n/a,n/a,South Africa,Deaths,19-Apr,2,54,124,3158
+South Africa,n/a,n/a,South Africa,Deaths,20-Apr,4,58,142,3300
+South Africa,n/a,n/a,South Africa,Deaths,21-Apr,0,58,165,3465
+South Africa,n/a,n/a,South Africa,Deaths,22-Apr,7,65,170,3635
+South Africa,n/a,n/a,South Africa,Deaths,23-Apr,10,75,318,3953
+South Africa,n/a,n/a,South Africa,Deaths,24-Apr,4,79,267,4220
+South Africa,n/a,n/a,South Africa,Deaths,25-Apr,7,86,141,4361
+South Africa,n/a,n/a,South Africa,Deaths,26-Apr,1,87,185,4546
+South Africa,n/a,n/a,South Africa,Deaths,27-Apr,3,90,247,4793
+South Africa,n/a,n/a,South Africa,Deaths,28-Apr,3,93,203,4996
+South Africa,n/a,n/a,South Africa,Deaths,29-Apr,10,103,354,5350
+South Africa,n/a,n/a,South Africa,Deaths,30-Apr,0,103,297,5647
+South Africa,n/a,n/a,South Africa,Deaths,1-May,13,116,304,5951
+South Africa,n/a,n/a,South Africa,Deaths,2-May,7,123,385,6336
+South Africa,n/a,n/a,South Africa,Deaths,3-May,8,131,447,6783
+South Africa,n/a,n/a,South Africa,Deaths,4-May,7,138,437,7220
+South Africa,n/a,n/a,South Africa,Deaths,5-May,10,148,352,7572
+South Africa,n/a,n/a,South Africa,Deaths,6-May,5,153,236,7808
+South Africa,n/a,n/a,South Africa,Deaths,7-May,8,161,424,8232
+South Africa,n/a,n/a,South Africa,Deaths,8-May,17,178,663,8895
+South Africa,n/a,n/a,South Africa,Deaths,9-May,8,186,525,9420
+South Africa,n/a,n/a,South Africa,Deaths,10-May,8,194,595,10015
+South Africa,n/a,n/a,South Africa,Deaths,11-May,12,206,637,10652
+South Africa,n/a,n/a,South Africa,Deaths,12-May,0,206,698,11350
+South Africa,n/a,n/a,South Africa,Deaths,13-May,13,219,724,12074
+South Africa,n/a,n/a,South Africa,Deaths,14-May,19,238,665,12739
+South Africa,n/a,n/a,South Africa,Deaths,15-May,9,247,785,13524
+South Africa,n/a,n/a,South Africa,Deaths,16-May,14,261,831,14355
+South Africa,n/a,n/a,South Africa,Deaths,17-May,3,264,1160,15515
+South Africa,n/a,n/a,South Africa,Deaths,18-May,22,286,918,16433
+South Africa,n/a,n/a,South Africa,Deaths,19-May,26,312,767,17200
+South Africa,n/a,n/a,South Africa,Deaths,20-May,27,339,803,18003
+South Africa,n/a,n/a,South Africa,Deaths,21-May,30,369,1134,19137
+South Africa,n/a,n/a,South Africa,Deaths,22-May,28,397,988,20125
+South Africa,n/a,n/a,South Africa,Deaths,23-May,10,407,1218,21343
+South Africa,n/a,n/a,South Africa,Deaths,24-May,22,429,1240,22583
+South Africa,n/a,n/a,South Africa,Deaths,25-May,52,481,1032,23615
+South Africa,n/a,n/a,South Africa,Deaths,26-May,43,524,649,24264
+South Africa,n/a,n/a,South Africa,Deaths,27-May,28,552,1673,25937
+South Africa,n/a,n/a,South Africa,Deaths,28-May,25,577,1466,27403
+South Africa,n/a,n/a,South Africa,Deaths,29-May,34,611,1837,29240
+South Africa,n/a,n/a,South Africa,Deaths,30-May,32,643,1727,30967
+South Africa,n/a,n/a,South Africa,Deaths,31-May,40,683,1716,32683
+South Africa,n/a,n/a,South Africa,Deaths,1-Jun,22,705,1674,34357
+South Africa,n/a,n/a,South Africa,Deaths,2-Jun,50,755,1455,35812
+South Africa,n/a,n/a,South Africa,Deaths,3-Jun,37,792,1713,37525
+South Africa,n/a,n/a,South Africa,Deaths,4-Jun,56,848,3267,40792
+South Africa,n/a,n/a,South Africa,Deaths,5-Jun,60,908,2642,43434
+South Africa,n/a,n/a,South Africa,Deaths,6-Jun,44,952,2539,45973
+South Africa,n/a,n/a,South Africa,Deaths,7-Jun,46,998,2312,48285
+South Africa,n/a,n/a,South Africa,Deaths,8-Jun,82,1080,2594,50879
+South Africa,n/a,n/a,South Africa,Deaths,9-Jun,82,1162,2112,52991
+South Africa,n/a,n/a,South Africa,Deaths,10-Jun,48,1210,2430,55421
+South Africa,n/a,n/a,South Africa,Deaths,11-Jun,74,1284,3147,58568
+South Africa,n/a,n/a,South Africa,Deaths,12-Jun,70,1354,3359,61927
+South Africa,n/a,n/a,South Africa,Deaths,13-Jun,69,1423,3809,65736
+Nigeria,n/a,n/a,Nigeria,Deaths,22-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,23-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,24-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,25-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,26-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,27-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,28-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,29-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,30-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,31-Jan,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,1-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,2-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,3-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,4-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,5-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,6-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,7-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,8-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,9-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,10-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,11-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,12-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,13-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,14-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,15-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,16-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,17-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,18-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,19-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,20-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,21-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,22-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,23-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,24-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,25-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,26-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,27-Feb,0,0,0,0
+Nigeria,n/a,n/a,Nigeria,Deaths,28-Feb,0,0,1,1
+Nigeria,n/a,n/a,Nigeria,Deaths,29-Feb,0,0,0,1
+Nigeria,n/a,n/a,Nigeria,Deaths,1-Mar,0,0,0,1
+Nigeria,n/a,n/a,Nigeria,Deaths,2-Mar,0,0,0,1
+Nigeria,n/a,n/a,Nigeria,Deaths,3-Mar,0,0,0,1
+Nigeria,n/a,n/a,Nigeria,Deaths,4-Mar,0,0,0,1
+Nigeria,n/a,n/a,Nigeria,Deaths,5-Mar,0,0,0,1
+Nigeria,n/a,n/a,Nigeria,Deaths,6-Mar,0,0,0,1
+Nigeria,n/a,n/a,Nigeria,Deaths,7-Mar,0,0,0,1
+Nigeria,n/a,n/a,Nigeria,Deaths,8-Mar,0,0,0,1
+Nigeria,n/a,n/a,Nigeria,Deaths,9-Mar,0,0,1,2
+Nigeria,n/a,n/a,Nigeria,Deaths,10-Mar,0,0,0,2
+Nigeria,n/a,n/a,Nigeria,Deaths,11-Mar,0,0,0,2
+Nigeria,n/a,n/a,Nigeria,Deaths,12-Mar,0,0,0,2
+Nigeria,n/a,n/a,Nigeria,Deaths,13-Mar,0,0,0,2
+Nigeria,n/a,n/a,Nigeria,Deaths,14-Mar,0,0,0,2
+Nigeria,n/a,n/a,Nigeria,Deaths,15-Mar,0,0,0,2
+Nigeria,n/a,n/a,Nigeria,Deaths,16-Mar,0,0,0,2
+Nigeria,n/a,n/a,Nigeria,Deaths,17-Mar,0,0,1,3
+Nigeria,n/a,n/a,Nigeria,Deaths,18-Mar,0,0,5,8
+Nigeria,n/a,n/a,Nigeria,Deaths,19-Mar,0,0,0,8
+Nigeria,n/a,n/a,Nigeria,Deaths,20-Mar,0,0,4,12
+Nigeria,n/a,n/a,Nigeria,Deaths,21-Mar,0,0,10,22
+Nigeria,n/a,n/a,Nigeria,Deaths,22-Mar,0,0,8,30
+Nigeria,n/a,n/a,Nigeria,Deaths,23-Mar,1,1,10,40
+Nigeria,n/a,n/a,Nigeria,Deaths,24-Mar,0,1,4,44
+Nigeria,n/a,n/a,Nigeria,Deaths,25-Mar,0,1,7,51
+Nigeria,n/a,n/a,Nigeria,Deaths,26-Mar,0,1,14,65
+Nigeria,n/a,n/a,Nigeria,Deaths,27-Mar,0,1,5,70
+Nigeria,n/a,n/a,Nigeria,Deaths,28-Mar,0,1,19,89
+Nigeria,n/a,n/a,Nigeria,Deaths,29-Mar,0,1,22,111
+Nigeria,n/a,n/a,Nigeria,Deaths,30-Mar,1,2,20,131
+Nigeria,n/a,n/a,Nigeria,Deaths,31-Mar,0,2,4,135
+Nigeria,n/a,n/a,Nigeria,Deaths,1-Apr,0,2,39,174
+Nigeria,n/a,n/a,Nigeria,Deaths,2-Apr,0,2,10,184
+Nigeria,n/a,n/a,Nigeria,Deaths,3-Apr,2,4,26,210
+Nigeria,n/a,n/a,Nigeria,Deaths,4-Apr,0,4,4,214
+Nigeria,n/a,n/a,Nigeria,Deaths,5-Apr,1,5,18,232
+Nigeria,n/a,n/a,Nigeria,Deaths,6-Apr,0,5,6,238
+Nigeria,n/a,n/a,Nigeria,Deaths,7-Apr,1,6,16,254
+Nigeria,n/a,n/a,Nigeria,Deaths,8-Apr,0,6,22,276
+Nigeria,n/a,n/a,Nigeria,Deaths,9-Apr,1,7,12,288
+Nigeria,n/a,n/a,Nigeria,Deaths,10-Apr,0,7,17,305
+Nigeria,n/a,n/a,Nigeria,Deaths,11-Apr,3,10,13,318
+Nigeria,n/a,n/a,Nigeria,Deaths,12-Apr,0,10,5,323
+Nigeria,n/a,n/a,Nigeria,Deaths,13-Apr,0,10,20,343
+Nigeria,n/a,n/a,Nigeria,Deaths,14-Apr,1,11,30,373
+Nigeria,n/a,n/a,Nigeria,Deaths,15-Apr,1,12,34,407
+Nigeria,n/a,n/a,Nigeria,Deaths,16-Apr,1,13,35,442
+Nigeria,n/a,n/a,Nigeria,Deaths,17-Apr,4,17,51,493
+Nigeria,n/a,n/a,Nigeria,Deaths,18-Apr,2,19,49,542
+Nigeria,n/a,n/a,Nigeria,Deaths,19-Apr,2,21,85,627
+Nigeria,n/a,n/a,Nigeria,Deaths,20-Apr,1,22,38,665
+Nigeria,n/a,n/a,Nigeria,Deaths,21-Apr,0,22,0,665
+Nigeria,n/a,n/a,Nigeria,Deaths,22-Apr,6,28,208,873
+Nigeria,n/a,n/a,Nigeria,Deaths,23-Apr,3,31,108,981
+Nigeria,n/a,n/a,Nigeria,Deaths,24-Apr,1,32,114,1095
+Nigeria,n/a,n/a,Nigeria,Deaths,25-Apr,3,35,87,1182
+Nigeria,n/a,n/a,Nigeria,Deaths,26-Apr,5,40,91,1273
+Nigeria,n/a,n/a,Nigeria,Deaths,27-Apr,0,40,64,1337
+Nigeria,n/a,n/a,Nigeria,Deaths,28-Apr,4,44,195,1532
+Nigeria,n/a,n/a,Nigeria,Deaths,29-Apr,7,51,196,1728
+Nigeria,n/a,n/a,Nigeria,Deaths,30-Apr,7,58,204,1932
+Nigeria,n/a,n/a,Nigeria,Deaths,1-May,10,68,238,2170
+Nigeria,n/a,n/a,Nigeria,Deaths,2-May,17,85,218,2388
+Nigeria,n/a,n/a,Nigeria,Deaths,3-May,2,87,170,2558
+Nigeria,n/a,n/a,Nigeria,Deaths,4-May,6,93,244,2802
+Nigeria,n/a,n/a,Nigeria,Deaths,5-May,5,98,148,2950
+Nigeria,n/a,n/a,Nigeria,Deaths,6-May,5,103,195,3145
+Nigeria,n/a,n/a,Nigeria,Deaths,7-May,4,107,381,3526
+Nigeria,n/a,n/a,Nigeria,Deaths,8-May,10,117,386,3912
+Nigeria,n/a,n/a,Nigeria,Deaths,9-May,11,128,239,4151
+Nigeria,n/a,n/a,Nigeria,Deaths,10-May,15,143,248,4399
+Nigeria,n/a,n/a,Nigeria,Deaths,11-May,7,150,242,4641
+Nigeria,n/a,n/a,Nigeria,Deaths,12-May,8,158,146,4787
+Nigeria,n/a,n/a,Nigeria,Deaths,13-May,6,164,184,4971
+Nigeria,n/a,n/a,Nigeria,Deaths,14-May,3,167,191,5162
+Nigeria,n/a,n/a,Nigeria,Deaths,15-May,4,171,288,5450
+Nigeria,n/a,n/a,Nigeria,Deaths,16-May,5,176,171,5621
+Nigeria,n/a,n/a,Nigeria,Deaths,17-May,6,182,338,5959
+Nigeria,n/a,n/a,Nigeria,Deaths,18-May,9,191,216,6175
+Nigeria,n/a,n/a,Nigeria,Deaths,19-May,1,192,226,6401
+Nigeria,n/a,n/a,Nigeria,Deaths,20-May,8,200,276,6677
+Nigeria,n/a,n/a,Nigeria,Deaths,21-May,11,211,339,7016
+Nigeria,n/a,n/a,Nigeria,Deaths,22-May,10,221,245,7261
+Nigeria,n/a,n/a,Nigeria,Deaths,23-May,0,221,265,7526
+Nigeria,n/a,n/a,Nigeria,Deaths,24-May,5,226,313,7839
+Nigeria,n/a,n/a,Nigeria,Deaths,25-May,7,233,229,8068
+Nigeria,n/a,n/a,Nigeria,Deaths,26-May,16,249,276,8344
+Nigeria,n/a,n/a,Nigeria,Deaths,27-May,5,254,389,8733
+Nigeria,n/a,n/a,Nigeria,Deaths,28-May,5,259,182,8915
+Nigeria,n/a,n/a,Nigeria,Deaths,29-May,2,261,387,9302
+Nigeria,n/a,n/a,Nigeria,Deaths,30-May,12,273,553,9855
+Nigeria,n/a,n/a,Nigeria,Deaths,31-May,14,287,307,10162
+Nigeria,n/a,n/a,Nigeria,Deaths,1-Jun,12,299,416,10578
+Nigeria,n/a,n/a,Nigeria,Deaths,2-Jun,15,314,241,10819
+Nigeria,n/a,n/a,Nigeria,Deaths,3-Jun,1,315,347,11166
+Nigeria,n/a,n/a,Nigeria,Deaths,4-Jun,8,323,350,11516
+Nigeria,n/a,n/a,Nigeria,Deaths,5-Jun,10,333,328,11844
+Nigeria,n/a,n/a,Nigeria,Deaths,6-Jun,9,342,389,12233
+Nigeria,n/a,n/a,Nigeria,Deaths,7-Jun,12,354,253,12486
+Nigeria,n/a,n/a,Nigeria,Deaths,8-Jun,7,361,315,12801
+Nigeria,n/a,n/a,Nigeria,Deaths,9-Jun,4,365,663,13464
+Nigeria,n/a,n/a,Nigeria,Deaths,10-Jun,17,382,409,13873
+Nigeria,n/a,n/a,Nigeria,Deaths,11-Jun,5,387,681,14554
+Nigeria,n/a,n/a,Nigeria,Deaths,12-Jun,12,399,627,15181
+Nigeria,n/a,n/a,Nigeria,Deaths,13-Jun,8,407,501,15682
