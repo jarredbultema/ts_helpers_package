@@ -1,0 +1,1644 @@
+# Time Series helper functions Table of Contents and Index
+
+
+----------------------
+ts_data_preparation.py
+----------------------
+
+execute_query(statement, conn_string):
+    '''
+    Executes a Query on a SQL database
+    
+    statement: str
+        SQL query
+    conn_string: str
+        Connection string for the database of interest
+        
+    Returns:
+    --------
+    output of SQL query
+    '''
+    
+create_df_from_query(table_name, cursor, index_col= None, select_cols= '*'):
+    '''
+    Create a Pandas DataFrame from a SQL query when you want select columns from an existing table
+    
+    table_name: str
+        Name of table in database
+    cursor: psycopg2.extensions.cursor
+        Psycopg2 cursor object
+    index_col: str
+        Column name for index column
+    select_cols: str
+        Columns to be selected from table, must be in SQL-sytnax
+    
+    Returns:
+    --------
+    Pandas df
+    '''
+
+aggregate_df(df, aggregators= None, string_columns= None, numeric_columns= None, ignore_columns= None):
+    '''
+    Aggregates individual data by designated single or multi-level aggregation columns and performs aggregation for different column types.
+    -----
+    inputs:
+    df: Pandas df
+        input df with non-aggregated timeseries data
+    aggregators: list
+        list of columnms names to be used for aggregation
+    string_columns: list
+        list of columnms names that should be treated as strings
+    numeric_columns: list 
+        list of columnms names that should be treated as numeric (int/float) objects
+    ignore_columns: list
+        list of columns that should not have aggregation statistics calculated
+        
+    Returns
+    -------
+    Pandas df
+    '''
+
+==================
+
+
+------------------
+ts_data_quality.py
+------------------
+
+DataQualityCheck:
+    """
+    A class used to capture summary stats and data quality checks prior to uploading time series data to DataRobot
+
+    Attributes:
+    -----------
+    df : DataFrame
+        time series data, including a date column and target variable at a minimum
+    settings : dict
+        definitions of date_col, target_col, series_id and time series parameters
+    stats : dict
+        summary statistics generated from `calc_summary_stats`
+    duplicate_dates : int
+        duplicate dates in the time series date_col
+    series_timesteps : series
+        steps between time units for each series_id
+    series_max_gap : series
+        maximum time gap per series
+    series_lenth : series
+        length of each series_id
+    series_pct : series
+        percent of series with complete time steps
+    irregular : boolean
+        True if df contains irregular time series data
+    series_negative_target_pct : float
+        Percent of target values that are negative
+
+    Methods:
+    --------
+    calc_summary_stats(settings, df)
+        generates a dictionary of summary statistics
+    calc_time_steps(settings, df)
+        calculate time steps per series_id
+    hierarchical_check(settings, df)
+        check if time series data passes heirarchical check
+    zero_inflated_check(settings, df)
+        check if target value contains zeros
+    negative_values_check(settings, df)
+        check if target value contains negative values
+    time_steps_gap_check(settings, df)
+        check if any series has missing time steps
+    irregular_check(settings, df)
+        check is time series data irregular
+    """
+
+    calc_summary_stats(self):
+            """
+            Analyze time series data to perform checks and gather summary statistics prior to modeling.
+
+            """
+
+    calc_percent_missing(self, missing_value=np.nan):
+            """
+            Calculate percentage of rows where target is np.nan
+            """
+
+    get_zero_inflated_series(self, cutoff=0.99):
+            """
+            Identify series where the target is 0.0 in more than x% of the rows
+
+            Returns:
+            --------
+            List of series
+
+            """
+
+    calc_time_steps(self):
+            """
+            Calculate timesteps per series
+
+            """
+
+    hierarchical_check(self):
+            """
+            Calculate percentage of series that appear on each timestep
+
+            """        
+
+    zero_inflated_check(self):
+            """
+            Check if minimum target value is 0.0
+
+            """
+
+    negative_values_check(self):
+            """
+            Check if any series contain negative values. If yes, identify and call out which series by id.
+
+            """
+
+    new_series_check(self):
+            """
+            Check if any series start after the the minimum datetime
+
+            """
+
+    old_series_check(self):
+            """
+            Check if any series end before the maximum datetime
+
+            """        
+
+    leading_or_trailing_zeros_check(self, threshold=5, drop=True):
+            """
+            Check for contain consecutive zeros at the beginning or end of each series
+
+            """
+
+    duplicate_dates_check(self):
+            """
+            Check for duplicate datetimes within each series
+
+            """
+
+    time_steps_gap_check(self):
+            """
+            Check for missing timesteps within each series
+
+            """
+
+    _get_spacing(self, df, project_time_unit):
+            """
+            Helper function for self.irregular_check()
+
+            Returns:
+            --------
+            List of series
+
+            """
+
+    irregular_check(self, plot=False):
+            """
+            Check for irregular spacing within each series
+
+            """
+
+    detect_periodicity(self, alpha=0.05):
+            """
+            Calculate project-level periodicity
+
+            """
+        
+    run_all_checks(self):
+            """
+            Runner function to run all data checks in one call
+
+            """   
+        
+get_timestep(df, ts_settings):
+    """
+    Calculate the project-level timestep
+
+    Returns:
+    --------
+    project_time_unit: minute, hour, day, week, or month
+    project_time_step: int
+
+    Examples:
+    --------
+    '1 days'
+    '4 days'
+    '1 week'
+    '2 months'
+
+    """      
+
+_reindex_dates(group, freq):
+    """
+    Helper function for fill_missing_dates()
+
+    """
+
+fill_missing_dates(df, ts_settings, freq=None):
+    """
+    Insert rows with np.nan targets for series with missing timesteps between the series start and end dates
+
+    df: pandas df
+    ts_settings: dictionary of parameters for time series project
+    freq: project time unit and timestep
+    Returns:
+    --------
+    pandas df with inserted rows
+    """
+
+_remove_leading_zeros(df, date_col, target, threshold=5, drop=False):
+    """
+    Remove excess zeros at the beginning  of series
+
+    df: pandas df
+    date_col: str
+        Column name for datetime column in df
+    target: str
+        Column name for target column in df
+    threshold: minimum number of consecutive zeros at the beginning of a series before rows are dropped
+    drop: specifies whether to drop the zeros or set them to np.nan
+
+    Returns:
+    --------
+    pandas df
+    """
+
+_remove_trailing_zeros(df, date_col, target, threshold=5, drop=False):
+    """
+    Remove excess zeros at the end of series
+
+    df: pandas df
+    date_col: str
+        Column name for datetime column in df
+    target: str
+        Column name for target column in df
+    threshold: minimum number of consecutive zeros at the beginning of a series before rows are dropped
+    drop: specifies whether to drop the zeros or set them to np.nan
+
+    Returns:
+    --------
+    pandas df
+    """
+
+remove_leading_and_trailing_zeros(
+    df, series_id, date_col, target, leading_threshold=5, trailing_threshold=5, drop=False
+):
+    """
+    Remove excess zeros at the beginning or end of series
+
+    df: pandas df
+    leading_threshold: minimum number of consecutive zeros at the beginning of a series before rows are dropped
+    trailing_threshold: minimum number of consecutive zeros at the end of series before rows are dropped
+    drop: specifies whether to drop the zeros or set them to np.nan
+
+    Returns:
+    --------
+    pandas df
+    """
+    
+_cut_series_by_rank(df, ts_settings, n=1, top=True):
+    """
+    Select top-n or bottom-n series by rank
+    
+    df: pandas df
+    ts_settings: dict
+        Parameters for datetime DR projects
+    n: int
+        number of series to select
+    top: bool
+        Select highest (True) or lowest series (False)
+    
+    Returns:
+    --------
+    pandas df
+    """    
+
+_cut_series_by_quantile(df, ts_settings, quantile=0.95, top=True):
+    """
+    Select top-n or bottom-n series by quantile
+    
+    df: pandas df
+    ts_settings: dict
+        Parameters for datetime DR projects
+    quantile: np.float
+        threshold for series to select
+    top: bool
+        Select highest (True) or lowest series (False)
+    
+    Returns:
+    --------
+    pandas df
+    """
+
+plot_series_average(df, ts_settings):
+    """
+    Plot average series values on the same chart
+
+    df: Pandas df
+        Contains information on individual series
+    ts_settings: dict
+        Parameters for time series project
+    
+    Returns:
+    --------
+    Plotly line plot
+    """
+
+plot_individual_series(df, ts_settings, n=None, top=True):
+    """
+    Plot individual series on the same chart
+    
+    df: Pandas df
+        Contains information on individual series
+    ts_settings: dict
+        Parameters for time series project
+    n: (int) number of series to plot
+    top: (boolean) whether to select the top n largest or smallest series ranked by average target value
+    
+    Returns:
+    --------
+    Plotly line plot
+    """
+    
+==================
+
+
+--------------------
+ts_pre_processing.py
+--------------------
+
+dataset_reduce_memory(df):
+    """
+    Recast numerics to lower precision
+    """
+
+create_series_id(df, cols_to_concat, convert=True):
+    """
+    Concatenate columns
+
+    Returns:
+    --------
+    pandas Series
+    """
+
+_create_cross_series_feature(df, group, col, func):
+    """
+    Creates aggregate functions for statistics within a cluster
+    df: pandas df
+    group: str
+        Column name used for groupby
+    col: str
+        Column name on which functions should be applied
+    func: list
+        list of pandas-compatible .transform(func) of aggregation functions
+        
+    Returns:
+    --------
+    pandas df
+    """
+
+create_cross_series_features(df, group, cols, funcs):
+    """
+    Create custom aggregations across groups
+    
+    df: pandas df
+    group: str
+        Column name used for groupby
+    col: str
+        Column name on which functions should be applied
+    func: list
+        list of pandas-compatible .transform(func) of aggregation functions
+
+    Returns:
+    --------
+    pandas df with new cross series features
+
+    Example:
+    --------
+    df_agg = create_cross_series_features(df,
+                                          group=[date_col,'Cluster'],
+                                          cols=[target,'feat_1'],
+                                          funcs=['mean','std'])
+    """
+
+get_zero_inflated_series(df, ts_settings, cutoff=0.99):
+    """
+    Identify series where the target is 0.0 in more than x% of the rows
+
+    df: pandas df
+    ts_settings: dict
+        Parameters of datetime DR project
+    cutoff: np.float
+        Threshold for removal of zero-inflated series. Retained series must be present in row >= cutoff
+
+    Returns:
+    --------
+    List of series
+    """
+    
+drop_zero_inflated_series(df, ts_settings, cutoff=0.99):
+    """
+    Remove series where the target is 0.0 in more than x% of the rows
+
+    df: pandas df
+    ts_settings: dict
+        Parameters of datetime DR project
+    cutoff: np.float
+        Threshold for removal of zero-inflated series. Retained series must be present in row >= cutoff
+
+    Returns:
+    --------
+    pandas df
+    """    
+
+sample_series(df, series_id, date_col, target, x=1, method='random', **kwargs):
+    """
+    Sample series
+
+    x: percent of series to sample
+    random: sample x% of the series at random
+    target: sample the largest x% of series
+    timespan: sample the top x% of series with the longest histories
+
+    """
+
+drop_series_w_gaps(df, series_id, date_col, target, max_gap=1, output_dropped_series=False):
+    """
+    Removes series with missing rows
+    
+    df: pandas df
+    series_id: str
+        Column name with series identifier
+    date_col: str
+        Column name of datetime column
+    target: str
+        Column name of target column
+    max_gap: int
+        number of allowed missing timestep
+    output_dropped_series: bool (optional)
+        allows return of pandas df of series that do not satisfy max_gap criteria
+    
+    Returns:
+    --------
+    pandas df(s)
+    """
+    
+====================
+
+
+--------------
+ts_calendar.py
+--------------
+
+create_ts_calendar(df, ts_settings, additional_events=None):
+    """
+    df: pandas df
+    ts_settings: dict
+        Parameters for time series project
+    additional_events: pandas df(optional)
+        df of additional events to add to calendar
+
+    Returns:
+    --------
+    Calendar of events
+
+    """
+
+create_and_upload_ts_calendar(
+    df, ts_settings, filename='events_cal.csv', calendar_name='Calendar', calendar=None
+):
+    """
+    df: pandas df
+    ts_settings: dict
+        Parameters for time series project
+    calendar: pandas df (optional)
+        If calendar is None a new calendar will be created
+
+    Returns:
+    --------
+    DataRobot calendar object
+    """
+
+plot_ts_calendar(df, ts_settings, calendar=None):
+    """
+    Add calendar dates to plot of average target values
+    
+    df: pandas df
+    ts_settings: dict
+        Parameters of datetime DR project
+    calendar: DataRobot calendar object
+        if None, automatically creates calendar. Premade calendar can be shown instead
+        
+    Returns:
+    --------
+    Plotly lineplot with added calendar dates as scatter plot
+    """
+
+==============
+
+
+----------------
+ts_clustering.py
+----------------
+
+add_cluster_labels(
+    df,
+    ts_settings,
+    method,
+    nlags=None,
+    scale=True,
+    scale_method='min_max',
+    alpha=0.05,
+    split_method=None,
+    n_clusters=None,
+    max_clusters=None,
+    plot=True,
+):
+    """
+    Calculates series clusters and appends a column of cluster labels to the input df
+
+    df: pandas df
+    ts_settings: dictionary of parameters for time series project
+    method: type of clustering technique: must choose from either pacf, correlation, performance, or target
+    nlags: int (Optional)
+        Number of AR(n) lags. Only applies to PACF method
+    scale: boolean (Optional)
+        Only applies to PACF method
+    scale_method: str (Optiona)
+        Choose between normalize (subtract the mean and divide by the std) or min_max (subtract the min and divide by the range)
+    split_method: str (Optional)
+        Choose between rank and quanitles. Only applies to target method
+    n_clusters: int
+        Number of clusters to create. If None, defaults to maximum silhouette score
+    max_clusters: int
+        Maximum number of clusters to create. If None, default to the number of series - 1
+
+    Returns:
+    --------
+    Updated pandas df with a new column 'Cluster' of clusters labels
+            -silhouette score per cluster:
+            (The best value is 1 and the worst value is -1. Values near 0 indicate overlapping
+            clusters. Negative values generally indicate that a sample has been assigned to the
+            wrong cluster.)
+            -plot of distortion per cluster
+    """
+
+_split_series(df, series_id, target, by='quantiles', cuts=5, split_col='Cluster'):
+    """
+    Split series into clusters by rank or quantile  of average target value
+
+    by: str
+        Rank or quantiles
+    cuts: int
+        Number of clusters
+    split_col: str
+        Name of new column
+
+    Returns:
+    --------
+    pandas df
+    """
+
+_get_pacf_coefs(df, col, nlags, alpha, scale, scale_method):
+    """
+    Helper function for add_cluster_labels()
+
+    df: pandas df
+    col: str
+        Series name
+    nlags: int
+        Number of AR coefficients to include in pacf
+    alpha: float
+        Cutoff value for p-values to determine statistical significance
+    scale: boolean
+        Whether to standardize input data
+    scale_method: str
+        Choose from 'min_max' or 'normalize'
+
+    Returns:
+    --------
+    List of AR(n) coefficients
+
+    """
+
+_get_performance_cluster_results(df, ts_settings, n_clusters, max_clusters):
+    """
+    Helper function for add_cluster_labels()
+
+    Use series acccuracy from an XGBoost model to cluster series
+
+    Returns:
+    --------
+    distance matrix
+
+    """
+
+_get_optimal_n_clusters(df, n_series, max_clusters, plot=True):
+    """
+    Helper function for add_cluster_labels()
+
+    Get the number of clusters that results in the max silhouette score
+
+    Returns:
+    --------
+    int
+
+    """
+
+plot_clusters(df, ts_settings, split_col='Cluster', max_sample_size=50000):
+    """
+    df: pandas df
+    ts_settings: dictionary of parameters for time series project
+    col: cluster_id columns
+
+    Returns:
+    --------
+    Plotly bar plot
+
+    """
+
+reshape_df(df, ts_settings, agg_level= 'W', scale= False):
+    """
+    Restructures a dataset for use in dimensionality reduction
+
+    df: Pandas DataFrame
+        Input dataframe with time series data
+    ts_settings: dict
+        Pre-defined time series projet settings
+    agg_level: str
+        Resampling frequency, allowed values found in pandas docs: https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.DataFrame.resample.html
+    scale: bool
+        True / False. Controls if output df is MinMax scaled
+    Returns:
+    --------
+    Pandas DataFrame
+    """
+
+plot_UMAP(df_T, df_clustered, ts_settings):
+    """
+    Perform dimensionality reduction and plot a transformed dataframe to assess clustering efficacy
+
+    df_T: Pandas DataFrame
+        Transposed dataframe for dimensionality reduction
+    df_clustered: Pandas DataFrame
+        Dataframe with series_id and cluster labels
+    ts_settings: dict
+        Pre-defined time series projet settings
+
+    Returns:
+    --------
+    Plotly 3D scatter plot
+    """
+
+================
+
+
+--------------
+ts_modeling.py
+--------------
+
+create_dr_project(df, project_name, ts_settings, **advanced_options):
+    """
+    Kickoff single DataRobot project
+
+    df: pandas df
+    project_name: name of project
+    ts_settings: dictionary of parameters for time series project
+
+    Returns:
+    --------
+    DataRobot project object
+
+    #######################
+    # Get Advanced Options
+    #######################
+    opts = {
+        'weights': None,
+        'response_cap': None,
+        'blueprint_threshold': None,
+        'seed': None,
+        'smart_downsampled': False,
+        'majority_downsampling_rate': None,
+        'offset': None,
+        'exposure': None,
+        'accuracy_optimized_mb': None,
+        'scaleout_modeling_mode': None,
+        'events_count': None,
+        'monotonic_increasing_featurelist_id': None,
+        'monotonic_decreasing_featurelist_id': None,
+        'only_include_monotonic_blueprints': None,
+    }
+
+    ############################
+    # Get Datetime Specification
+    ############################
+    settings = {
+        'max_date': None,
+        'known_in_advance': None,
+        'num_backtests': None,
+        'validation_duration': None,
+        'holdout_duration': None,
+        'holdout_start_date': None,
+        'disable_holdout': False,
+        'number_of_backtests': None,
+        'backtests': None,
+        'use_cross_series_features': None,
+        'aggregation_type': None,
+        'cross_series_group_by_columns': None,
+        'calendar_id': None,
+        'use_time_series': False,
+        'series_id': None,
+        'metric': None,
+        'target': None,
+        'mode': dr.AUTOPILOT_MODE.FULL_AUTO,  # MANUAL #QUICK
+        'date_col': None,
+        'fd_start': None,
+        'fd_end': None,
+        'fdw_start': None,
+        'fdw_end': None,
+    } 
+    """
+
+create_dr_projects(df, ts_settings, prefix='TS', split_col=None, fdws=None, fds=None, **advanced_options):
+    """
+    Kickoff multiple DataRobot projects
+
+    df: pandas df
+    ts_settings: dictionary of parameters for time series project
+    prefix: str to concatenate to start of project name
+    split_col: column in df that identifies cluster labels
+    fdws: list of tuples containing feature derivation window start and end values
+    fds: list of tuples containing forecast distance start and end values
+
+    Returns:
+    --------
+    List of projects
+
+    Example:
+    --------
+    split_col = 'Cluster'
+    fdws=[(-14,0),(-28,0),(-62,0)]
+    fds = [(1,7),(8,14)]
+    """
+
+wait_for_jobs_to_process(projects):
+    """
+    Check if any DataRobot jobs are still processing
+    
+    projects: list
+        list of DataRobot project object
+    """
+
+train_timeseries_blender(project, models, n_models=None, blender_method='AVERAGE', data_subset='allBacktests'):
+    '''
+    Train timeseries blenders for a DataRobot Datetimemodels
+
+    project: DataRobot project object
+        DataRobot project in which to create blenders
+    models: list (optional)
+        DataRobot Datetimemodel model ids
+    n_models: int (optional)
+        Use top n_models to create blenders
+    blender_method: str
+        Type of blender to create
+    data_subset: str
+        desired backtest to get top models. Inputs are: 'backtest_1, all_Backtests, holdout'
+    '''
+
+train_timeseries_blender_projects(projects, models, n_models=None, blender_method='AVERAGE',
+                                      data_subset='allBacktests'):
+    '''
+    Train timeseries blenders for multiple DataRobot projects
+
+    projects: list
+        DataRobot project objects in which to create blenders
+    models: list of lists (optional)
+        list of DataRobot Datetimemodel model ids for each project
+    n_models: int (optional)
+        Use top n_models to create blenders
+    blender_method: str
+        Type of blender to create
+    data_subset: str
+        desired backtest to get top models. Inputs are: 'backtest_1, all_Backtests, holdout'
+    '''
+
+run_repository_models(projects, n_bps=None, insane=False, exclude=['Mean', 'Eureqa', 'Keras', 'VARMAX']):
+    """
+    Run blueprints from the repository using the feature list from the DataRobot recommended models
+
+    projects: list
+        DataRobot project object(s)
+    n_bps: int
+        Number of blueprints from repository to return
+    insane: bool
+        If True, run repo on featurelist from top 5 blueprints on leaderboard, if False run on recommended model featurelist
+    exclude: list
+        DataRobot model types to exclude from running
+    """
+
+==============
+
+--------------
+ts_projects.py
+
+get_top_models_from_project(project, n_models=1, data_subset='allBacktests', include_blenders=True, metric=None):
+    """
+    project: project object
+        DataRobot project
+    n_models: int
+        Number of top models to return
+    data_subset: str (optional)
+        Can be set to either allBacktests or holdout
+    include_blenders: boolean (optional)
+        Controls whether to include ensemble models
+    metric: str (optional)
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    List of model objects from a DataRobot project
+
+    """
+
+get_top_models_from_projects(projects, n_models=1, data_subset='allBacktests', include_blenders=True, metric=None):
+    """
+    Pull top models from leaderboard across multiple DataRobot projects
+
+    projects: list
+        DataRobot project object(s)
+    n_models: int
+        Number of top models to return
+    data_subset: str (optional)
+        Can be set to either allBacktests or holdout
+    include_blenders: boolean (optional)
+        Controls whether to include ensemble models
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    List of model objects from DataRobot project(s)
+    """
+    
+get_ranked_model(project, model_rank, metric= None, data_subset= 'allBacktests'):
+    """
+    project: project object
+        DataRobot project
+    model_rank: int
+        None if top model, model leaderboard rank if any model other than top desired
+    metric: str (optional)
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+    data_subset: str (optional)
+        Can be set to either backtest_1, allBacktests or holdout
+
+    Returns:
+    --------
+    model object from a DataRobot project
+    """    
+    
+compute_backtests(projects, n_models=5, data_subset='backtest_1', include_blenders=True, metric=None):
+    """
+    Compute all backtests for top models across multiple DataRobot projects
+
+    projects: list
+        DataRobot project object(s)
+    n_models: int
+        Number of top models to return
+    data_subset: str (optional)
+        Can be set to either allBacktests or holdout
+    include_blenders: boolean (optional)
+        Controls whether to include ensemble models
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    """
+
+get_or_request_backtest_scores(projects, n_models=5, data_subset='allBacktests', include_blenders=True, metric=None):
+    """
+    Get or request backtest and holdout scores from top models across multiple DataRobot projects
+
+    projects: list
+        DataRobot project object(s)
+    n_models: int
+        Number of top models to return
+    data_subset: str (optional)
+        Can be set to either allBacktests or holdout
+    include_blenders: boolean (optional)
+        Controls whether to include ensemble models
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    pandas df
+    """
+
+get_or_request_training_predictions_from_model(model, data_subset='allBacktests'):
+    """
+    Get row-level backtest or holdout predictions from a model
+
+    model: DataRobot Datetime model object
+        DataRobot project object(s)
+    data_subset: str (optional)
+        Can be set to either allBacktests or holdout
+
+    Returns:
+    --------
+    pandas Series
+    """
+
+get_or_request_training_predictions_from_projects(projects, n_models=1, data_subset='allBacktests', include_blenders=True, metric=None):
+    """
+    Get row-level backtest or holdout predictions from top models across multiple DataRobot projects
+
+    projects: list
+        DataRobot project object(s)
+    n_models: int
+        Number of top models to return
+    data_subset: str (optional)
+        Can be set to either allBacktests or holdout
+    include_blenders: boolean (optional)
+        Controls whether to include ensemble models
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    pandas Series
+    """
+
+get_preds_and_actuals(df, projects, ts_settings, n_models=1, data_subset='allBacktests', include_blenders=True, metric=None):
+    """
+    Get row-level predictions and merge onto actuals
+
+    df: pandas df
+    projects: list
+        DataRobot project object(s)
+    ts_settings: dict
+        Parameters for time series project
+    n_models: int
+        Number of top models to return
+    data_subset: str (optional)
+        Can be set to either allBacktests or holdout
+    include_blenders: boolean (optional)
+        Controls whether to include ensemble models
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    pandas df
+    """
+
+get_or_request_model_scores(project, model, include_blenders=False, metric=None):
+    """
+    Get or request backtest and holdout scores from specified, retrained DataRobot model
+
+    projects: list
+        DataRobot project object(s)
+    model: dr.Model
+        DataRobot DatetimeModel, this is the reference model from which other feature lists were created
+    include_blenders: boolean (optional)
+        Controls whether to include ensemble models
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    pandas df
+    """
+
+get_cluster_acc(df, projects, ts_settings, data_subset='allBacktests', include_blenders=True, metric=None, acc_calc=rmse):
+    """
+    Get cluster-level and overall accuracy across multiple DataRobot projects
+
+    df: pandas df
+    projects: list
+        DataRobot project object(s)
+    ts_settings: dict
+        Parameters for time series project
+    data_subset: str
+        Valid values are either holdout or allBacktests
+    include_backtests: boolean (optional)
+        Controls whether blender models are considered
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+    acc_calc: function
+        Function to calculate row-level prediction accuracy. Choose from mae, rmse, mape, smape, gamma, poission, and tweedie
+
+    Returns:
+    --------
+    pandas df
+    """
+
+plot_cluster_acc(cluster_acc, ts_settings, data_subset='allBacktests', acc_calc=rmse):
+    """
+    Plots cluster-level and overall accuracy across multiple DataRobot projects
+
+    cluster_acc: pandas df
+        Output from get_cluster_acc()
+    ts_settings: dict
+        Pparameters for time series project
+    data_subset: str
+        Choose either holdout or allBacktests
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    Plotly barplot
+    """
+
+get_series_acc(df, projects, ts_settings, data_subset='allBacktests', include_blenders=True, metric=None, acc_calc=rmse,):
+    """
+    Get series-level and overall accuracy across multiple DataRobot projects
+
+    df: pandas df
+    projects: list
+        DataRobot project object(s)
+    ts_settings: dict
+        Parameters for time series project
+    data_subset: str
+        Valid values are either holdout or allBacktests
+    include_backtests: boolean (optional)
+        Controls whether blender models are considered
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+    acc_calc: function
+        Function to calculate row-level prediction accuracy. Choose from mae, rmse, mape, smape, gamma, poission, and tweedie
+
+    Returns:
+    --------
+    pandas df
+    """
+
+plot_preds_and_actuals(df, projects, ts_settings, fd_range=None, fd_agg= 'mean', fd= None, average= False, series_name= None, top=None, data_subset= 'allBacktests', include_blenders=False, metric= None, acc_calc=rmse):
+    """
+    Get series-level and overall accuracy across multiple DataRobot projects
+
+    df: pandas df
+    projects: list
+        DataRobot project object(s)
+    ts_settings: dict
+        Parameters for time series project
+    fd_range: tuple of ints
+        FD start and stop for plotting, None will select all FD
+    fd_agg: str
+        Aggregation of multiple predictions for a date, accepts 'min', 'max', 'mean'
+    fd: int
+        Specify FD to plot predictions vs actuals using only that FD
+    average: bool
+        If plotting average values or individual series
+    series_name: str
+        Series name (str) to plot
+    top: bool
+        Plot highest or lowest ordered series by mean target value
+    data_subset: str
+        Valid values are either holdout or allBacktests
+    include_backtests: boolean (optional)
+        Controls whether blender models are considered
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+    acc_calc: function
+        Function to calculate row-level prediction accuracy. Choose from mae, rmse, mape, smape, gamma, poission, and tweedie
+        
+    Returns:
+    --------
+    Plotly lineplot
+    """
+
+plot_series_acc(series_acc, ts_settings, data_subset='allBacktests', acc_calc=rmse, n=50):
+    """
+    Plots series-level and overall accuracy across multiple DataRobot projects
+
+    cluster_acc: pandas df
+        Output from get_series_acc()
+    ts_settings: dict
+        Parameters for time series project
+    data_subset: str
+        Choose from either holdout or allBacktests
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    Plotly barplot
+    """
+
+get_project_info(df):
+    """
+    Parse project name to get FD, FDW, and Cluster information
+
+    Returns:
+    --------
+    pandas df
+    """
+
+filter_best_fdw_scores(scores, col_error='All_Backtests_RMSE'):
+    """
+    Subset df to projects with the best error metric for each FD and Cluster pair
+
+    scores: pandas df
+        Output from get_or_request_backtest_scores()
+    col_error: str
+        Column name from scores df
+
+    Returns:
+    --------
+    pandas df
+    """
+
+filter_best_fdw_projects(scores, projects, col_error='All_Backtests_RMSE'):
+    """
+    Subset list to projects with the best error metric for each FD and Cluster pair
+
+    scores: pandas df
+        Output from get_or_request_backtest_scores()
+    projects: list
+        DataRobot projects object(s)
+    col_error: str
+        Column name from scores df
+
+    Returns:
+    --------
+    list
+    """
+
+get_backtest_information(p, models, entry, entry_count, ts_settings):
+    """
+    Get training and backtest durations from a model from one DataRobot project
+
+    p: datarobot.models.project.Project
+        DataRobot project object
+    entry: list
+        DataRobot model backtest information
+    entry_count: int/str
+        Counter for backtest number, or designation as holdout
+    ts_settings: dict
+        Parameters for time series project
+
+    Returns:
+    --------
+    list
+    """
+
+get_training_and_backtest_windows(projects, ts_settings, data_subset='allBacktests', metric= None):
+    """
+    Get training and backtest durations from models across multiple DataRobot projects
+
+    projects: list
+        DataRobot project object(s)
+    ts_settings: dict
+        Parameters for time series project
+    data_subset: str (optional)
+        Can be set to either allBacktests, backtest_n (n= Backtest number), holdout
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'MASE', 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    pandas df
+    """
+
+check_series_backtests(cluster_information, series_name, ts_settings, backtest_information):
+    """
+    Determines series-level coverage across multiple backtests
+
+    cluster_information: pandas df
+        Information about each series including a cluster id, output from add_cluster_labels()
+    series_name: str
+        Name of an individual series
+    ts_settings: dict
+        Parameters for time series project
+    backtest_information: pandas df
+        contains information on how many records are present for each series in each backtest 
+        , output from get_training_and_backtest_windows()
+
+    Returns:
+    --------
+    Pandas DataFrame
+    """
+
+check_all_series_backtests(cluster_information, ts_settings, backtest_information):
+    """
+    Plots series-level coverage across multiple backtests
+
+    cluster_information: pandas df
+        Information about each series including a cluster id, output from add_cluster_labels()
+    ts_settings: dict
+        Parameters for time series project
+    backtest_information: pandas df
+        contains information on how many records are present for each series in each backtest 
+        , output from get_training_and_backtest_windows()
+
+    Returns:
+    --------
+    Pandas DataFrame
+    """
+
+get_series_in_backtests(df, data_subset, present= True, threshold= None):
+    """
+    Selects the subset of series that are present or absent in any defined backtest
+    df: Pandas df
+        Output of check_all_series_backtests(), contains information on presence of series in each backtest period
+    data_subset: str
+        Which data_subsets should be included in analysis, accpets individual backtests ('backtest_1', 'allBacktests', 'holdout')
+    present: bool
+        Select series that are present (True) or absent (False) from backtesting window(s)
+    threshold: np.float (0.0 - 1.0)
+        cutoff threshold to determine presence
+        
+    Returns:
+    --------
+    series: list
+        Series names that match the selection conditions
+    """
+    
+plot_series_backtest_coverage(series_backtests, ts_settings, n=50):
+    """
+    Plots series-level coverage across multiple backtests
+
+    series_backtests: pandas df
+        Output from check_all_series_backtests()
+    ts_settings: dict
+        Parameters for time series project
+    data_subset: str
+        Choose from either holdout or allBacktests
+    n: int
+        Number of series to display
+
+    Returns:
+    --------
+    Plotly barplot
+    """
+    
+plot_fd_accuracy(df, projects, ts_settings, data_subset='allBacktests', metric='RMSE'):
+    """
+    Plots accuracy over forecast distance
+
+    df: pandas df
+        Input data
+    projects: list
+        List of DataRobot datetime projects
+    ts_settings: dict
+        Parameters for time series project
+    data_subset: str
+        Choose from either holdout or allBacktests
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+
+    Returns:
+    --------
+    Plotly lineplot
+    """
+
+plot_fd_accuracy_by_cluster(df, scores, projects, ts_settings, data_subset='holdout', metric='RMSE', split_col='Cluster'):
+    """
+    Plots accuracy over forecast distance by cluster
+
+    df: pandas df
+        Input data
+    scores: pandas df
+        Output from get_or_request_backtest_scores()
+    projects: list
+        List of DataRobot datetime projects
+    ts_settings: dict
+        Parameters for time series project
+    data_subset: str (optional)
+        Choose from either holdout or allBacktests
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+        Choose from list of 'RMSE', 'MAPE', 'SMAPE', 'MAE', 'R Squared', 'Gamma Deviance',
+                            'SMAPE', 'Tweedie Deviance', 'Poisson Deviance', or 'RMSLE'
+    split_col: str (optional)
+        Column name to be used to split by cluster
+
+    Returns:
+    --------
+    Plotly lineplot
+    """
+        
+get_reduced_features_featurelist(project, model, threshold=0.99):
+    """
+    Helper function for train_reduced_features_models()
+
+    project: DataRobot project object
+    model: DataRobot model object
+    threshold: np.float
+
+    Returns:
+    --------
+    DataRobot featurelist
+    """
+    
+train_reduced_features_models(projects, n_models=1, threshold=0.99, data_subset='allBacktests', include_blenders=True, metric=None, iteration=False, model_rank= None,  model_id = None):
+    """
+    Retrain top models with reduced feature featurelists
+
+    projects: list
+        DataRobot project object(s)
+    n_models: int
+        Number of models to retrain with reduced feature featurelists
+    threshold: np.float
+        Controls the number of features to keep in the reduced feature list. Percentage of cumulative feature impact
+    data_subset: str (optional)
+        Choose from either holdout or allBacktests
+    include_blenders: boolean (optional)
+        Include blender models
+    metric: str (optional)
+        Project metric used to sort the DataRobot leaderboard
+    iteration: boolean (optional)
+        Optional parameter used to output length of feature list for some functions
+    model_rank: int (optional)
+        None if top model, model leaderboard rank if any model other than top desired
+    model_id: str (optional)
+        DataRobot model id
+    
+    Returns:
+    --------
+    (optional) Pandas df
+    """    
+    
+test_feature_selection(df, projects, ts_settings, n_models= 1, model_id= None, data_subset='allBacktests', metric='RMSE', threshold_range= (0.6, 1.0), step_size= 0.1, model_rank= None):
+    '''
+    Perform automated, iterative feature selection through a range of feature importance thresholds
+    
+    df: pandas df
+    projects: list
+        list of DataRobot projects for feature list selection
+    ts_settings: dict
+        Parameters for time series project
+    n_models: int
+        number of models to generate feature lists from
+    model_id: str
+        DataRobot model id
+    data_subset: str
+        Choose from either holdout or allBacktests
+    metric: str
+        Metric to be used for sorting the leaderboard, if None uses project metric
+    threshold_range: tuple of np.floats (optional)
+        upper and lower bounds of threshold for feature selection, percentage of cumulate feature impact
+    step_size: np.float (optional)
+        step-size across threshold-range
+    model_rank: int (optional)
+        None if top model, model leaderboard rank if any model other than top desired
+    
+    --------
+    Returns:
+    Pandas DataFrame
+    '''
+    
+run_feature_selection_projects(df, projects, ts_settings, data_subset='allBacktests', metric=None, threshold_range=(0.6, 1.0), step_size=0.1, plot= False):
+    '''
+    Perform automated, iterative feature selection through a range of feature importance thresholds for many projects, automatically selecting the best non-blender model that can be retrained
+    
+    df: pandas df
+    projects: list
+        list of DataRobot projects for feature list selection
+    ts_settings: dict
+        Parameters for time series project
+    data_subset: str
+        Choose from either holdout or allBacktests
+    metric: str
+        Metric to be used for sorting the leaderboard, if None uses project metric
+    threshold_range: tuple of np.floats (optional)
+        upper and lower bounds of threshold for feature selection, percentage of cumulate feature impact
+    step_size: np.float (optional)
+        step-size across threshold-range
+    plot: bool (optional)
+        Plot individual featurelist learning curves for all projects
+    --------
+    Returns:
+    Pandas DataFrame
+    '''
+    
+    
+plot_featurelist_learning_curve(df, data_subset='allBacktests', metric= None):
+    """
+    Plot the featurelist length and error metric to generate a learning curve
+
+    df: Pandas df
+        Contains information on feature lists, and accuracy for iterations on a model. output of test_feature_selection()
+    data_subset: str
+        desired backtest to plot. Inputs are: 'backtest_1, all_Backtests, holdout'
+    metric: str
+        error metric to plot. Inputs are: 'RMSE', 'MASE', 'Theils_U', 'SMAPE', 'R_Squared'
+    
+    Returns:
+    --------
+    Plotly lineplot
+    """
+    
+plot_all_featurelist_curves(df, ts_settings, data_subset='allBacktests', metric='RMSE'):
+    """
+    Plot all reduced featurelists on the same curve
+
+    df: pandas df
+    ts_settings: dict
+        Parameters for DR datetime projects
+    data_subset: str
+        data to be used for plotting
+    metric: str
+        metric used for plotting
+    
+    Returns:
+    --------
+    Plotly lineplot
+    """
+    
+==============    
+
+
+-----------------
+ts_predictions.py
+
+series_to_clusters(df, ts_settings, split_col='Cluster'):
+    '''
+    Creates a series map corresponding to series clusters
+    
+    df: pandas df
+    ts_settings: dict
+        Parameters for time series project
+    split_col: str
+        Column name in df to be used to subset data
+    
+    Returns:
+    --------
+    dict
+    '''
+
+clusters_to_series(df, ts_settings, split_col='Cluster'):
+    '''
+    Creates a cluster map corresponds to series within a cluster
+    
+    df: pandas df
+    ts_settings: dict
+        Parameters for time series project
+    split_col: str
+        Column name in df to be used to subset data
+    
+    Returns:
+    --------
+    dict
+    '''
+
+get_project_stats(
+    projects, n_models, cluster_to_series_map, metric=None, split_col='Cluster', prefix='TS', data_subset= 'allBacktests'
+):
+    '''
+    projects: list
+        list of DataRobot model objects
+    n_models: int
+        number of models to select from each DR project
+    cluster_to_series_map: dict
+        Dictionary to remap series and clusters
+    metric: str
+        Metric to be used for sorting the leaderboard, if None uses project metric
+    split_col: str
+        Column name in df to be used to subset data
+    prefix: str
+        Label to append to project name
+     data_subset: str (optional)
+        Can be set to either allBacktests or holdout
+    
+    Returns:
+    --------
+    Pandas df
+    '''
+
+deploy_models(models,
+                  labels=None,
+                  descriptions=None,
+                  pred_server=None):
+    '''
+    Deploy a list of DataRobot models
+
+    models: list
+        list of DataRobot model objects to deploy
+    labels: list (optional)
+        list of str for title of deployments
+    descriptions: list (optional)
+        list of str for description for deployments
+    pred_server: datarobot.models.prediction_server.PredictionServer (optional)
+        DataRobot prediction server object, or None and will automatically retrieve the first option
+
+    Returns:
+    --------
+    deployments: list
+    '''
+
+get_or_request_predictions(models, scoring_df, training_df, ts_settings, deployments= None, project_stats=None, start_date=None, end_date=None, forecast_point=None, retrain=False):
+    '''
+    models: list
+        list of DataRobot datetime project objects
+    deployments: list
+        list of DataRobot deployment ids
+    scoring_df: pandas df
+        Predictions dataframe that contains required information (KIA, future datetime stamp, etc) correspond to a desired range of predictions
+    training_df: pandas df (optional)
+        Predictions dataframe that contains training data used to build the model, required to augment FDW data
+    ts_settings: dict
+        Parameters for the time series projects in DR
+    project_sats: pandas df
+        output of get_project_stats(), contains detailed information on DR projects
+    start_date: datetime
+        Desired start date for DR project retraining from a frozen model
+    end_date: datetime
+        Desired end date for DR project retraining from a frozen model
+    forecast_point: datetime
+        Desired forecast point for start of predictions, must be configured associated with scoring_df
+    retrain: bool
+        Controls if a frozen DR datetime model will be retrained on a new training period
+        
+    Returns:
+    --------
+    pandas df
+    '''
+
+merge_preds_and_actuals(preds, actuals, ts_settings):
+    '''
+    Combined actuals from training data along with model predictions into a single df
+    
+    preds: pandas df
+        output from get_or_request_predictions(), contains model predictions from a defined period
+    actuals: pandas df
+        pandas df containing training data
+    ts_settings: dict
+        Parameters for a time series DR project
+        
+    Returns:
+    --------
+    pandas df
+    '''
+=================
+
+-------------
+ts_metrics.py
+-------------
+
+RECREATD MOST OF THIS FROM DATAROBOT SO THE SCORES WOULD MATCH THE GUI. 
+WITH SAMPLING IN PROJECTS, SCORES MAY NOT MATCH PRECISELY
+
+mae(act, pred, weight=None):
+    """
+    MAE = Mean Absolute Error = mean( abs(act - pred) )
+    """
+    
+rmse(act, pred, weight=None):
+    """
+    RMSE = Root Mean Squared Error = sqrt( mean( (act - pred)**2 ) )
+    """
+
+gamma_loss(act, pred, weight=None):
+    """Gamma deviance"""
+
+mape(act, pred, nan='ignore'):
+    """Mean Absolute Percentage Error"""
+    
+smape(act, pred):
+    """Symmetric Mean Absolute Percentage Error"""
+    
+tweedie_loss(act, pred, weight=None, p=1.5):
+    """tweedie deviance for p = 1.5 only"""
+
+poisson_loss(act, pred, weight=None):
+    """
+        Poisson Deviance = 2*(act*log(act/pred)-(act-pred))
+
+        ONLY WORKS FOR POSITIVE RESPONSES
+    """
+
+=============
+
+
