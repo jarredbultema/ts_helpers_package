@@ -1,4 +1,4 @@
-# ts_helpers package
+# datarobot_ts_helpers package
 ### A library of helper scripts to support complex time-series modeling using DataRobot AutoTS software
 
 ## Authors
