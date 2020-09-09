@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from statistics import mean 
 import re
 
-from src.ts_metrics import *
+from .ts_metrics import *
 
 
 ######################

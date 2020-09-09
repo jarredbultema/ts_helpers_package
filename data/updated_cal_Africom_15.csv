@@ -1,0 +1,639 @@
+Date,Country/Region,Holiday
+2020-01-01,Albania,Albania Holiday #1
+2020-01-02,Albania,Albania Holiday #2
+2020-03-14,Albania,Albania Holiday #3
+2020-03-16,Albania,Albania Holiday #4
+2020-03-22,Albania,Albania Holiday #5
+2020-04-12,Albania,Albania Holiday #6
+2020-04-19,Albania,Albania Holiday #7
+2020-05-01,Albania,Albania Holiday #8
+2020-05-24,Albania,Albania Holiday #9
+2020-07-31,Albania,Albania Holiday #10
+2020-09-05,Albania,Albania Holiday #11
+2020-11-28,Albania,Albania Holiday #12
+2020-11-29,Albania,Albania Holiday #13
+2020-11-30,Albania,Albania Holiday #14
+2020-12-08,Albania,Albania Holiday #15
+2020-01-01,Angola,Angola Holiday #1
+2020-02-04,Angola,Angola Holiday #2
+2020-02-25,Angola,Angola Holiday #3
+2020-03-09,Angola,Angola Holiday #4
+2020-04-04,Angola,Angola Holiday #5
+2020-04-10,Angola,Angola Holiday #6
+2020-04-12,Angola,Angola Holiday #7
+2020-05-01,Angola,Angola Holiday #8
+2020-09-17,Angola,Angola Holiday #9
+2020-11-02,Angola,Angola Holiday #10
+2020-11-11,Angola,Angola Holiday #11
+2020-12-25,Angola,Angola Holiday #12
+2020-01-01,Benin,Benin Holiday #1
+2020-01-10,Benin,Benin Holiday #2
+2020-04-13,Benin,Benin Holiday #3
+2020-05-01,Benin,Benin Holiday #4
+2020-05-21,Benin,Benin Holiday #5
+2020-05-24,Benin,Benin Holiday #6
+2020-06-01,Benin,Benin Holiday #7
+2020-07-31,Benin,Benin Holiday #8
+2020-08-01,Benin,Benin Holiday #9
+2020-08-15,Benin,Benin Holiday #10
+2020-10-29,Benin,Benin Holiday #11
+2020-11-01,Benin,Benin Holiday #12
+2020-12-25,Benin,Benin Holiday #13
+2020-01-01,Botswana,Botswana Holiday #1
+2020-01-02,Botswana,Botswana Holiday #2
+2020-04-10,Botswana,Botswana Holiday #3
+2020-04-11,Botswana,Botswana Holiday #4
+2020-04-13,Botswana,Botswana Holiday #5
+2020-05-01,Botswana,Botswana Holiday #6
+2020-05-21,Botswana,Botswana Holiday #7
+2020-07-01,Botswana,Botswana Holiday #8
+2020-07-20,Botswana,Botswana Holiday #9
+2020-07-21,Botswana,Botswana Holiday #10
+2020-09-30,Botswana,Botswana Holiday #11
+2020-10-01,Botswana,Botswana Holiday #12
+2020-12-25,Botswana,Botswana Holiday #13
+2020-12-26,Botswana,Botswana Holiday #14
+2020-01-01,Burkina Faso,Burkina Faso Holiday #1
+2020-01-03,Burkina Faso,Burkina Faso Holiday #2
+2020-03-08,Burkina Faso,Burkina Faso Holiday #3
+2020-04-12,Burkina Faso,Burkina Faso Holiday #4
+2020-04-13,Burkina Faso,Burkina Faso Holiday #5
+2020-05-01,Burkina Faso,Burkina Faso Holiday #6
+2020-05-21,Burkina Faso,Burkina Faso Holiday #7
+2020-05-24,Burkina Faso,Burkina Faso Holiday #8
+2020-07-31,Burkina Faso,Burkina Faso Holiday #9
+2020-08-05,Burkina Faso,Burkina Faso Holiday #10
+2020-08-15,Burkina Faso,Burkina Faso Holiday #11
+2020-11-01,Burkina Faso,Burkina Faso Holiday #12
+2020-12-11,Burkina Faso,Burkina Faso Holiday #13
+2020-12-25,Burkina Faso,Burkina Faso Holiday #14
+2020-01-01,Burundi,Burundi Holiday #1
+2020-02-05,Burundi,Burundi Holiday #2
+2020-04-06,Burundi,Burundi Holiday #3
+2020-05-01,Burundi,Burundi Holiday #4
+2020-05-20,Burundi,Burundi Holiday #5
+2020-05-21,Burundi,Burundi Holiday #6
+2020-06-26,Burundi,Burundi Holiday #7
+2020-07-01,Burundi,Burundi Holiday #8
+2020-07-31,Burundi,Burundi Holiday #9
+2020-08-15,Burundi,Burundi Holiday #10
+2020-10-13,Burundi,Burundi Holiday #11
+2020-10-21,Burundi,Burundi Holiday #12
+2020-11-01,Burundi,Burundi Holiday #13
+2020-12-25,Burundi,Burundi Holiday #14
+2020-01-01,Cameroon,Cameroon Holiday #1
+2020-02-10,Cameroon,Cameroon Holiday #2
+2020-02-11,Cameroon,Cameroon Holiday #3
+2020-04-10,Cameroon,Cameroon Holiday #4
+2020-05-01,Cameroon,Cameroon Holiday #5
+2020-05-20,Cameroon,Cameroon Holiday #6
+2020-05-21,Cameroon,Cameroon Holiday #7
+2020-05-24,Cameroon,Cameroon Holiday #8
+2020-07-31,Cameroon,Cameroon Holiday #9
+2020-08-15,Cameroon,Cameroon Holiday #10
+2020-10-29,Cameroon,Cameroon Holiday #11
+2020-12-25,Cameroon,Cameroon Holiday #12
+2020-01-01,Cape Verde,Cape Verde Holiday #1
+2020-01-13,Cape Verde,Cape Verde Holiday #2
+2020-01-20,Cape Verde,Cape Verde Holiday #3
+2020-05-01,Cape Verde,Cape Verde Holiday #4
+2020-06-01,Cape Verde,Cape Verde Holiday #5
+2020-07-05,Cape Verde,Cape Verde Holiday #6
+2020-08-15,Cape Verde,Cape Verde Holiday #7
+2020-11-01,Cape Verde,Cape Verde Holiday #8
+2020-12-25,Cape Verde,Cape Verde Holiday #9
+2020-01-01,Central African Republic,Central African Republic Holiday #1
+2020-03-29,Central African Republic,Central African Republic Holiday #2
+2020-04-13,Central African Republic,Central African Republic Holiday #3
+2020-05-01,Central African Republic,Central African Republic Holiday #4
+2020-05-21,Central African Republic,Central African Republic Holiday #5
+2020-05-24,Central African Republic,Central African Republic Holiday #6
+2020-06-01,Central African Republic,Central African Republic Holiday #7
+2020-06-30,Central African Republic,Central African Republic Holiday #8
+2020-07-31,Central African Republic,Central African Republic Holiday #9
+2020-08-13,Central African Republic,Central African Republic Holiday #10
+2020-08-15,Central African Republic,Central African Republic Holiday #11
+2020-11-01,Central African Republic,Central African Republic Holiday #12
+2020-12-01,Central African Republic,Central African Republic Holiday #13
+2020-12-25,Central African Republic,Central African Republic Holiday #14
+2020-01-01,Chad,Chad Holiday #1
+2020-03-09,Chad,Chad Holiday #2
+2020-04-13,Chad,Chad Holiday #3
+2020-05-01,Chad,Chad Holiday #4
+2020-05-24,Chad,Chad Holiday #5
+2020-05-25,Chad,Chad Holiday #6
+2020-07-31,Chad,Chad Holiday #7
+2020-08-11,Chad,Chad Holiday #8
+2020-10-29,Chad,Chad Holiday #9
+2020-11-01,Chad,Chad Holiday #10
+2020-11-28,Chad,Chad Holiday #11
+2020-12-01,Chad,Chad Holiday #12
+2020-12-25,Chad,Chad Holiday #13
+2020-01-01,Comoros,Comoros Holiday #1
+2020-03-18,Comoros,Comoros Holiday #2
+2020-03-22,Comoros,Comoros Holiday #3
+2020-05-01,Comoros,Comoros Holiday #4
+2020-05-24,Comoros,Comoros Holiday #5
+2020-05-25,Comoros,Comoros Holiday #6
+2020-05-26,Comoros,Comoros Holiday #7
+2020-07-06,Comoros,Comoros Holiday #8
+2020-07-31,Comoros,Comoros Holiday #9
+2020-08-01,Comoros,Comoros Holiday #10
+2020-08-20,Comoros,Comoros Holiday #11
+2020-10-29,Comoros,Comoros Holiday #12
+2020-01-01,Congo,Congo Holiday #1
+2020-04-12,Congo,Congo Holiday #2
+2020-04-13,Congo,Congo Holiday #3
+2020-05-01,Congo,Congo Holiday #4
+2020-05-21,Congo,Congo Holiday #5
+2020-06-01,Congo,Congo Holiday #6
+2020-06-10,Congo,Congo Holiday #7
+2020-08-15,Congo,Congo Holiday #8
+2020-11-01,Congo,Congo Holiday #9
+2020-11-28,Congo,Congo Holiday #10
+2020-12-25,Congo,Congo Holiday #11
+2020-01-01,Djibouti,Djibouti Holiday #1
+2020-03-22,Djibouti,Djibouti Holiday #2
+2020-05-01,Djibouti,Djibouti Holiday #3
+2020-05-24,Djibouti,Djibouti Holiday #4
+2020-05-25,Djibouti,Djibouti Holiday #5
+2020-06-27,Djibouti,Djibouti Holiday #6
+2020-07-31,Djibouti,Djibouti Holiday #7
+2020-08-01,Djibouti,Djibouti Holiday #8
+2020-08-20,Djibouti,Djibouti Holiday #9
+2020-10-29,Djibouti,Djibouti Holiday #10
+2020-12-25,Djibouti,Djibouti Holiday #11
+2020-01-01,Democratic Republic of the Congo,Democratic Republic of the Congo Holiday #1
+2020-01-04,Democratic Republic of the Congo,Democratic Republic of the Congo Holiday #2
+2020-01-16,Democratic Republic of the Congo,Democratic Republic of the Congo Holiday #3
+2020-01-17,Democratic Republic of the Congo,Democratic Republic of the Congo Holiday #4
+2020-05-01,Democratic Republic of the Congo,Democratic Republic of the Congo Holiday #5
+2020-05-17,Democratic Republic of the Congo,Democratic Republic of the Congo Holiday #6
+2020-06-30,Democratic Republic of the Congo,Democratic Republic of the Congo Holiday #7
+2020-08-01,Democratic Republic of the Congo,Democratic Republic of the Congo Holiday #8
+2020-12-25,Democratic Republic of the Congo,Democratic Republic of the Congo Holiday #9
+2020-01-01,Egypt,Egypt Holiday #1
+2020-01-07,Egypt,Egypt Holiday #2
+2020-01-25,Egypt,Egypt Holiday #3
+2020-03-12,Egypt,Egypt Holiday #4
+2020-04-19,Egypt,Egypt Holiday #5
+2020-04-20,Egypt,Egypt Holiday #6
+2020-04-25,Egypt,Egypt Holiday #7
+2020-05-01,Egypt,Egypt Holiday #8
+2020-05-02,Egypt,Egypt Holiday #9
+2020-05-24,Egypt,Egypt Holiday #10
+2020-05-25,Egypt,Egypt Holiday #11
+2020-05-26,Egypt,Egypt Holiday #12
+2020-05-27,Egypt,Egypt Holiday #13
+2020-05-28,Egypt,Egypt Holiday #14
+2020-06-30,Egypt,Egypt Holiday #15
+2020-07-23,Egypt,Egypt Holiday #16
+2020-07-31,Egypt,Egypt Holiday #17
+2020-08-01,Egypt,Egypt Holiday #18
+2020-08-02,Egypt,Egypt Holiday #19
+2020-08-03,Egypt,Egypt Holiday #20
+2020-08-20,Egypt,Egypt Holiday #21
+2020-10-06,Egypt,Egypt Holiday #22
+2020-10-29,Egypt,Egypt Holiday #23
+2020-01-01,Equatorial Guinea,Equatorial Guinea Holiday #1
+2020-04-10,Equatorial Guinea,Equatorial Guinea Holiday #2
+2020-05-01,Equatorial Guinea,Equatorial Guinea Holiday #3
+2020-06-05,Equatorial Guinea,Equatorial Guinea Holiday #4
+2020-06-11,Equatorial Guinea,Equatorial Guinea Holiday #5
+2020-08-03,Equatorial Guinea,Equatorial Guinea Holiday #6
+2020-08-15,Equatorial Guinea,Equatorial Guinea Holiday #7
+2020-10-12,Equatorial Guinea,Equatorial Guinea Holiday #8
+2020-12-08,Equatorial Guinea,Equatorial Guinea Holiday #9
+2020-12-25,Equatorial Guinea,Equatorial Guinea Holiday #10
+2020-01-01,Eritrea,Eritrea Holiday #1
+2020-01-07,Eritrea,Eritrea Holiday #2
+2020-01-19,Eritrea,Eritrea Holiday #3
+2020-03-08,Eritrea,Eritrea Holiday #4
+2020-04-17,Eritrea,Eritrea Holiday #5
+2020-04-19,Eritrea,Eritrea Holiday #6
+2020-05-01,Eritrea,Eritrea Holiday #7
+2020-05-24,Eritrea,Eritrea Holiday #8
+2020-06-20,Eritrea,Eritrea Holiday #9
+2020-07-31,Eritrea,Eritrea Holiday #10
+2020-09-01,Eritrea,Eritrea Holiday #11
+2020-09-11,Eritrea,Eritrea Holiday #12
+2020-09-27,Eritrea,Eritrea Holiday #13
+2020-10-29,Eritrea,Eritrea Holiday #14
+2020-12-25,Eritrea,Eritrea Holiday #15
+2020-01-01,Eswatini,Eswatini Holiday #1
+2020-04-10,Eswatini,Eswatini Holiday #2
+2020-04-13,Eswatini,Eswatini Holiday #3
+2020-04-19,Eswatini,Eswatini Holiday #4
+2020-04-20,Eswatini,Eswatini Holiday #5
+2020-04-25,Eswatini,Eswatini Holiday #6
+2020-05-01,Eswatini,Eswatini Holiday #7
+2020-05-21,Eswatini,Eswatini Holiday #8
+2020-07-22,Eswatini,Eswatini Holiday #9
+2020-08-31,Eswatini,Eswatini Holiday #10
+2020-09-06,Eswatini,Eswatini Holiday #11
+2020-09-07,Eswatini,Eswatini Holiday #12
+2020-12-25,Eswatini,Eswatini Holiday #13
+2020-12-26,Eswatini,Eswatini Holiday #14
+2020-01-01,Gabon,Gabon Holiday #1
+2020-04-13,Gabon,Gabon Holiday #2
+2020-04-17,Gabon,Gabon Holiday #3
+2020-05-01,Gabon,Gabon Holiday #4
+2020-05-21,Gabon,Gabon Holiday #5
+2020-05-24,Gabon,Gabon Holiday #6
+2020-06-01,Gabon,Gabon Holiday #7
+2020-07-31,Gabon,Gabon Holiday #8
+2020-08-15,Gabon,Gabon Holiday #9
+2020-08-16,Gabon,Gabon Holiday #10
+2020-08-17,Gabon,Gabon Holiday #11
+2020-11-01,Gabon,Gabon Holiday #12
+2020-12-25,Gabon,Gabon Holiday #13
+2020-01-01,Ghana,Ghana Holiday #1
+2020-01-07,Ghana,Ghana Holiday #2
+2020-03-06,Ghana,Ghana Holiday #3
+2020-04-10,Ghana,Ghana Holiday #4
+2020-04-13,Ghana,Ghana Holiday #5
+2020-05-01,Ghana,Ghana Holiday #6
+2020-05-25,Ghana,Ghana Holiday #7
+2020-07-01,Ghana,Ghana Holiday #8
+2020-07-31,Ghana,Ghana Holiday #9
+2020-08-04,Ghana,Ghana Holiday #10
+2020-09-21,Ghana,Ghana Holiday #11
+2020-12-04,Ghana,Ghana Holiday #12
+2020-12-25,Ghana,Ghana Holiday #13
+2020-12-26,Ghana,Ghana Holiday #14
+2020-01-01,Guinea,Guinea Holiday #1
+2020-04-13,Guinea,Guinea Holiday #2
+2020-05-01,Guinea,Guinea Holiday #3
+2020-05-20,Guinea,Guinea Holiday #4
+2020-05-24,Guinea,Guinea Holiday #5
+2020-05-25,Guinea,Guinea Holiday #6
+2020-07-31,Guinea,Guinea Holiday #7
+2020-08-15,Guinea,Guinea Holiday #8
+2020-10-02,Guinea,Guinea Holiday #9
+2020-10-29,Guinea,Guinea Holiday #10
+2020-11-01,Guinea,Guinea Holiday #11
+2020-12-25,Guinea,Guinea Holiday #12
+2020-01-01,Guinea-Bissau,Guinea-Bissau Holiday #1
+2020-01-20,Guinea-Bissau,Guinea-Bissau Holiday #2
+2020-03-08,Guinea-Bissau,Guinea-Bissau Holiday #3
+2020-05-01,Guinea-Bissau,Guinea-Bissau Holiday #4
+2020-05-24,Guinea-Bissau,Guinea-Bissau Holiday #5
+2020-07-31,Guinea-Bissau,Guinea-Bissau Holiday #6
+2020-08-03,Guinea-Bissau,Guinea-Bissau Holiday #7
+2020-09-24,Guinea-Bissau,Guinea-Bissau Holiday #8
+2020-11-14,Guinea-Bissau,Guinea-Bissau Holiday #9
+2020-12-25,Guinea-Bissau,Guinea-Bissau Holiday #10
+2020-01-01,Kenya,Kenya Holiday #1
+2020-02-11,Kenya,Kenya Holiday #2
+2020-04-10,Kenya,Kenya Holiday #3
+2020-04-13,Kenya,Kenya Holiday #4
+2020-05-01,Kenya,Kenya Holiday #5
+2020-05-25,Kenya,Kenya Holiday #6
+2020-06-01,Kenya,Kenya Holiday #7
+2020-07-31,Kenya,Kenya Holiday #8
+2020-10-10,Kenya,Kenya Holiday #9
+2020-10-20,Kenya,Kenya Holiday #10
+2020-11-14,Kenya,Kenya Holiday #11
+2020-12-12,Kenya,Kenya Holiday #12
+2020-12-25,Kenya,Kenya Holiday #13
+2020-12-26,Kenya,Kenya Holiday #14
+2020-01-01,Lesotho,Lesotho Holiday #1
+2020-03-11,Lesotho,Lesotho Holiday #2
+2020-04-10,Lesotho,Lesotho Holiday #3
+2020-04-13,Lesotho,Lesotho Holiday #4
+2020-05-01,Lesotho,Lesotho Holiday #5
+2020-05-21,Lesotho,Lesotho Holiday #6
+2020-05-25,Lesotho,Lesotho Holiday #7
+2020-07-17,Lesotho,Lesotho Holiday #8
+2020-10-04,Lesotho,Lesotho Holiday #9
+2020-12-25,Lesotho,Lesotho Holiday #10
+2020-12-26,Lesotho,Lesotho Holiday #11
+2020-01-01,Liberia,Liberia Holiday #1
+2020-02-11,Liberia,Liberia Holiday #2
+2020-03-11,Liberia,Liberia Holiday #3
+2020-03-15,Liberia,Liberia Holiday #4
+2020-03-16,Liberia,Liberia Holiday #5
+2020-04-10,Liberia,Liberia Holiday #6
+2020-04-12,Liberia,Liberia Holiday #7
+2020-05-14,Liberia,Liberia Holiday #8
+2020-12-25,Liberia,Liberia Holiday #9
+2020-01-01,Madagascar,Madagascar Holiday #1
+2020-03-29,Madagascar,Madagascar Holiday #2
+2020-04-13,Madagascar,Madagascar Holiday #3
+2020-05-01,Madagascar,Madagascar Holiday #4
+2020-05-21,Madagascar,Madagascar Holiday #5
+2020-05-24,Madagascar,Madagascar Holiday #6
+2020-06-01,Madagascar,Madagascar Holiday #7
+2020-06-26,Madagascar,Madagascar Holiday #8
+2020-07-31,Madagascar,Madagascar Holiday #9
+2020-08-15,Madagascar,Madagascar Holiday #10
+2020-11-01,Madagascar,Madagascar Holiday #11
+2020-12-25,Madagascar,Madagascar Holiday #12
+2020-01-01,Malawi,Malawi Holiday #1
+2020-01-15,Malawi,Malawi Holiday #2
+2020-03-03,Malawi,Malawi Holiday #3
+2020-04-10,Malawi,Malawi Holiday #4
+2020-04-13,Malawi,Malawi Holiday #5
+2020-05-01,Malawi,Malawi Holiday #6
+2020-05-14,Malawi,Malawi Holiday #7
+2020-05-24,Malawi,Malawi Holiday #8
+2020-07-06,Malawi,Malawi Holiday #9
+2020-10-15,Malawi,Malawi Holiday #10
+2020-12-25,Malawi,Malawi Holiday #11
+2020-12-26,Malawi,Malawi Holiday #12
+2020-01-01,Mali,Mali Holiday #1
+2020-01-20,Mali,Mali Holiday #2
+2020-03-26,Mali,Mali Holiday #3
+2020-04-13,Mali,Mali Holiday #4
+2020-05-01,Mali,Mali Holiday #5
+2020-05-24,Mali,Mali Holiday #6
+2020-05-25,Mali,Mali Holiday #7
+2020-07-31,Mali,Mali Holiday #8
+2020-09-22,Mali,Mali Holiday #9
+2020-10-29,Mali,Mali Holiday #10
+2020-11-05,Mali,Mali Holiday #11
+2020-12-25,Mali,Mali Holiday #12
+2020-01-01,Mauritania,Mauritania Holiday #1
+2020-05-01,Mauritania,Mauritania Holiday #2
+2020-05-24,Mauritania,Mauritania Holiday #3
+2020-05-25,Mauritania,Mauritania Holiday #4
+2020-07-31,Mauritania,Mauritania Holiday #5
+2020-08-01,Mauritania,Mauritania Holiday #6
+2020-08-20,Mauritania,Mauritania Holiday #7
+2020-10-29,Mauritania,Mauritania Holiday #8
+2020-11-28,Mauritania,Mauritania Holiday #9
+2020-01-01,Mauritius,Mauritius Holiday #1
+2020-01-02,Mauritius,Mauritius Holiday #2
+2020-01-25,Mauritius,Mauritius Holiday #3
+2020-02-01,Mauritius,Mauritius Holiday #4
+2020-02-08,Mauritius,Mauritius Holiday #5
+2020-02-21,Mauritius,Mauritius Holiday #6
+2020-03-12,Mauritius,Mauritius Holiday #7
+2020-03-25,Mauritius,Mauritius Holiday #8
+2020-04-14,Mauritius,Mauritius Holiday #9
+2020-05-01,Mauritius,Mauritius Holiday #10
+2020-05-24,Mauritius,Mauritius Holiday #11
+2020-08-15,Mauritius,Mauritius Holiday #12
+2020-08-23,Mauritius,Mauritius Holiday #13
+2020-11-02,Mauritius,Mauritius Holiday #14
+2020-11-14,Mauritius,Mauritius Holiday #15
+2020-12-25,Mauritius,Mauritius Holiday #16
+2020-01-01,Morocco,Morocco Holiday #1
+2020-01-11,Morocco,Morocco Holiday #2
+2020-05-01,Morocco,Morocco Holiday #3
+2020-05-24,Morocco,Morocco Holiday #4
+2020-05-25,Morocco,Morocco Holiday #5
+2020-07-30,Morocco,Morocco Holiday #6
+2020-07-31,Morocco,Morocco Holiday #7
+2020-08-01,Morocco,Morocco Holiday #8
+2020-08-14,Morocco,Morocco Holiday #9
+2020-08-20,Morocco,Morocco Holiday #10
+2020-08-21,Morocco,Morocco Holiday #11
+2020-10-29,Morocco,Morocco Holiday #12
+2020-11-06,Morocco,Morocco Holiday #13
+2020-11-18,Morocco,Morocco Holiday #14
+2020-01-01,Mozambique,Mozambique Holiday #1
+2020-02-03,Mozambique,Mozambique Holiday #2
+2020-04-07,Mozambique,Mozambique Holiday #3
+2020-05-01,Mozambique,Mozambique Holiday #4
+2020-06-25,Mozambique,Mozambique Holiday #5
+2020-09-07,Mozambique,Mozambique Holiday #6
+2020-09-25,Mozambique,Mozambique Holiday #7
+2020-10-05,Mozambique,Mozambique Holiday #8
+2020-12-25,Mozambique,Mozambique Holiday #9
+2020-01-01,Namibia,Namibia Holiday #1
+2020-03-21,Namibia,Namibia Holiday #2
+2020-04-10,Namibia,Namibia Holiday #3
+2020-04-13,Namibia,Namibia Holiday #4
+2020-05-01,Namibia,Namibia Holiday #5
+2020-05-04,Namibia,Namibia Holiday #6
+2020-05-21,Namibia,Namibia Holiday #7
+2020-05-25,Namibia,Namibia Holiday #8
+2020-08-26,Namibia,Namibia Holiday #9
+2020-12-10,Namibia,Namibia Holiday #10
+2020-12-25,Namibia,Namibia Holiday #11
+2020-12-26,Namibia,Namibia Holiday #12
+2020-01-01,Niger,Niger Holiday #1
+2020-04-13,Niger,Niger Holiday #2
+2020-04-24,Niger,Niger Holiday #3
+2020-05-01,Niger,Niger Holiday #4
+2020-05-20,Niger,Niger Holiday #5
+2020-05-24,Niger,Niger Holiday #6
+2020-07-31,Niger,Niger Holiday #7
+2020-08-01,Niger,Niger Holiday #8
+2020-08-03,Niger,Niger Holiday #9
+2020-08-20,Niger,Niger Holiday #10
+2020-10-29,Niger,Niger Holiday #11
+2020-12-18,Niger,Niger Holiday #12
+2020-12-25,Niger,Niger Holiday #13
+2020-01-01,Nigeria,Nigeria Holiday #1
+2020-02-07,Nigeria,Nigeria Holiday #2
+2020-02-25,Nigeria,Nigeria Holiday #3
+2020-04-10,Nigeria,Nigeria Holiday #4
+2020-04-13,Nigeria,Nigeria Holiday #5
+2020-05-01,Nigeria,Nigeria Holiday #6
+2020-05-25,Nigeria,Nigeria Holiday #7
+2020-05-26,Nigeria,Nigeria Holiday #8
+2020-05-27,Nigeria,Nigeria Holiday #9
+2020-06-12,Nigeria,Nigeria Holiday #10
+2020-07-31,Nigeria,Nigeria Holiday #11
+2020-10-01,Nigeria,Nigeria Holiday #12
+2020-11-18,Nigeria,Nigeria Holiday #13
+2020-12-22,Nigeria,Nigeria Holiday #14
+2020-12-25,Nigeria,Nigeria Holiday #15
+2020-12-28,Nigeria,Nigeria Holiday #16
+2020-01-01,São Tomé and Príncipe,São Tomé and Príncipe Holiday #1
+2020-02-03,São Tomé and Príncipe,São Tomé and Príncipe Holiday #2
+2020-04-10,São Tomé and Príncipe,São Tomé and Príncipe Holiday #3
+2020-05-01,São Tomé and Príncipe,São Tomé and Príncipe Holiday #4
+2020-07-12,São Tomé and Príncipe,São Tomé and Príncipe Holiday #5
+2020-09-06,São Tomé and Príncipe,São Tomé and Príncipe Holiday #6
+2020-09-30,São Tomé and Príncipe,São Tomé and Príncipe Holiday #7
+2020-12-21,São Tomé and Príncipe,São Tomé and Príncipe Holiday #8
+2020-12-25,São Tomé and Príncipe,São Tomé and Príncipe Holiday #9
+2020-01-01,Senegal,Senegal Holiday #1
+2020-04-04,Senegal,Senegal Holiday #2
+2020-04-13,Senegal,Senegal Holiday #3
+2020-05-01,Senegal,Senegal Holiday #4
+2020-05-21,Senegal,Senegal Holiday #5
+2020-05-24,Senegal,Senegal Holiday #6
+2020-06-01,Senegal,Senegal Holiday #7
+2020-07-31,Senegal,Senegal Holiday #8
+2020-08-15,Senegal,Senegal Holiday #9
+2020-08-29,Senegal,Senegal Holiday #10
+2020-10-06,Senegal,Senegal Holiday #11
+2020-10-29,Senegal,Senegal Holiday #12
+2020-11-01,Senegal,Senegal Holiday #13
+2020-12-25,Senegal,Senegal Holiday #14
+2020-01-01,Seychelles,Seychelles Holiday #1
+2020-01-02,Seychelles,Seychelles Holiday #2
+2020-01-03,Seychelles,Seychelles Holiday #3
+2020-04-10,Seychelles,Seychelles Holiday #4
+2020-04-11,Seychelles,Seychelles Holiday #5
+2020-04-13,Seychelles,Seychelles Holiday #6
+2020-05-01,Seychelles,Seychelles Holiday #7
+2020-06-11,Seychelles,Seychelles Holiday #8
+2020-06-18,Seychelles,Seychelles Holiday #9
+2020-06-29,Seychelles,Seychelles Holiday #10
+2020-08-15,Seychelles,Seychelles Holiday #11
+2020-11-01,Seychelles,Seychelles Holiday #12
+2020-12-08,Seychelles,Seychelles Holiday #13
+2020-12-25,Seychelles,Seychelles Holiday #14
+2020-01-01,Sierra Leone,Sierra Leone Holiday #1
+2020-03-08,Sierra Leone,Sierra Leone Holiday #2
+2020-03-09,Sierra Leone,Sierra Leone Holiday #3
+2020-04-10,Sierra Leone,Sierra Leone Holiday #4
+2020-04-13,Sierra Leone,Sierra Leone Holiday #5
+2020-04-27,Sierra Leone,Sierra Leone Holiday #6
+2020-05-24,Sierra Leone,Sierra Leone Holiday #7
+2020-05-25,Sierra Leone,Sierra Leone Holiday #8
+2020-07-31,Sierra Leone,Sierra Leone Holiday #9
+2020-10-29,Sierra Leone,Sierra Leone Holiday #10
+2020-12-25,Sierra Leone,Sierra Leone Holiday #11
+2020-12-26,Sierra Leone,Sierra Leone Holiday #12
+2020-01-01,Somalia,Somalia Holiday #1
+2020-03-22,Somalia,Somalia Holiday #2
+2020-05-01,Somalia,Somalia Holiday #3
+2020-05-24,Somalia,Somalia Holiday #4
+2020-06-26,Somalia,Somalia Holiday #5
+2020-07-01,Somalia,Somalia Holiday #6
+2020-07-31,Somalia,Somalia Holiday #7
+2020-08-20,Somalia,Somalia Holiday #8
+2020-08-29,Somalia,Somalia Holiday #9
+2020-10-29,Somalia,Somalia Holiday #10
+2020-12-25,Somalia,Somalia Holiday #11
+2020-01-01,South Africa,South Africa Holiday #1
+2020-03-21,South Africa,South Africa Holiday #2
+2020-04-10,South Africa,South Africa Holiday #3
+2020-04-13,South Africa,South Africa Holiday #4
+2020-04-27,South Africa,South Africa Holiday #5
+2020-05-01,South Africa,South Africa Holiday #6
+2020-06-16,South Africa,South Africa Holiday #7
+2020-08-09,South Africa,South Africa Holiday #8
+2020-08-10,South Africa,South Africa Holiday #9
+2020-09-24,South Africa,South Africa Holiday #10
+2020-12-16,South Africa,South Africa Holiday #11
+2020-12-25,South Africa,South Africa Holiday #12
+2020-12-28,South Africa,South Africa Holiday #13
+2020-01-01,Sudan,Sudan Holiday #1
+2020-01-07,Sudan,Sudan Holiday #2
+2020-04-19,Sudan,Sudan Holiday #3
+2020-05-24,Sudan,Sudan Holiday #4
+2020-07-31,Sudan,Sudan Holiday #5
+2020-08-20,Sudan,Sudan Holiday #6
+2020-10-29,Sudan,Sudan Holiday #7
+2020-12-25,Sudan,Sudan Holiday #8
+2020-01-01,Tanzania,Tanzania Holiday #1
+2020-01-12,Tanzania,Tanzania Holiday #2
+2020-04-07,Tanzania,Tanzania Holiday #3
+2020-04-10,Tanzania,Tanzania Holiday #4
+2020-04-12,Tanzania,Tanzania Holiday #5
+2020-04-13,Tanzania,Tanzania Holiday #6
+2020-04-26,Tanzania,Tanzania Holiday #7
+2020-05-01,Tanzania,Tanzania Holiday #8
+2020-05-24,Tanzania,Tanzania Holiday #9
+2020-05-25,Tanzania,Tanzania Holiday #10
+2020-07-07,Tanzania,Tanzania Holiday #11
+2020-07-31,Tanzania,Tanzania Holiday #12
+2020-08-01,Tanzania,Tanzania Holiday #13
+2020-08-08,Tanzania,Tanzania Holiday #14
+2020-10-14,Tanzania,Tanzania Holiday #15
+2020-10-29,Tanzania,Tanzania Holiday #16
+2020-10-30,Tanzania,Tanzania Holiday #17
+2020-12-09,Tanzania,Tanzania Holiday #18
+2020-12-25,Tanzania,Tanzania Holiday #19
+2020-12-26,Tanzania,Tanzania Holiday #20
+2020-01-01,Togo,Togo Holiday #1
+2020-04-13,Togo,Togo Holiday #2
+2020-04-27,Togo,Togo Holiday #3
+2020-05-01,Togo,Togo Holiday #4
+2020-05-21,Togo,Togo Holiday #5
+2020-05-24,Togo,Togo Holiday #6
+2020-06-01,Togo,Togo Holiday #7
+2020-06-21,Togo,Togo Holiday #8
+2020-07-31,Togo,Togo Holiday #9
+2020-08-15,Togo,Togo Holiday #10
+2020-11-01,Togo,Togo Holiday #11
+2020-12-25,Togo,Togo Holiday #12
+2020-01-01,Tunisia,Tunisia Holiday #1
+2020-01-14,Tunisia,Tunisia Holiday #2
+2020-03-20,Tunisia,Tunisia Holiday #3
+2020-04-09,Tunisia,Tunisia Holiday #4
+2020-05-01,Tunisia,Tunisia Holiday #5
+2020-05-24,Tunisia,Tunisia Holiday #6
+2020-05-25,Tunisia,Tunisia Holiday #7
+2020-05-26,Tunisia,Tunisia Holiday #8
+2020-07-25,Tunisia,Tunisia Holiday #9
+2020-07-31,Tunisia,Tunisia Holiday #10
+2020-08-01,Tunisia,Tunisia Holiday #11
+2020-08-02,Tunisia,Tunisia Holiday #12
+2020-08-13,Tunisia,Tunisia Holiday #13
+2020-08-20,Tunisia,Tunisia Holiday #14
+2020-10-15,Tunisia,Tunisia Holiday #15
+2020-10-29,Tunisia,Tunisia Holiday #16
+2020-01-01,Uganda,Uganda Holiday #1
+2020-01-26,Uganda,Uganda Holiday #2
+2020-02-16,Uganda,Uganda Holiday #3
+2020-03-08,Uganda,Uganda Holiday #4
+2020-04-10,Uganda,Uganda Holiday #5
+2020-04-13,Uganda,Uganda Holiday #6
+2020-05-01,Uganda,Uganda Holiday #7
+2020-05-24,Uganda,Uganda Holiday #8
+2020-06-03,Uganda,Uganda Holiday #9
+2020-06-09,Uganda,Uganda Holiday #10
+2020-07-31,Uganda,Uganda Holiday #11
+2020-10-09,Uganda,Uganda Holiday #12
+2020-12-25,Uganda,Uganda Holiday #13
+2020-12-26,Uganda,Uganda Holiday #14
+2020-01-01,Zambia,Zambia Holiday #1
+2020-03-09,Zambia,Zambia Holiday #2
+2020-03-12,Zambia,Zambia Holiday #3
+2020-04-10,Zambia,Zambia Holiday #4
+2020-04-11,Zambia,Zambia Holiday #5
+2020-04-13,Zambia,Zambia Holiday #6
+2020-05-01,Zambia,Zambia Holiday #7
+2020-05-25,Zambia,Zambia Holiday #8
+2020-07-06,Zambia,Zambia Holiday #9
+2020-07-07,Zambia,Zambia Holiday #10
+2020-08-03,Zambia,Zambia Holiday #11
+2020-10-19,Zambia,Zambia Holiday #12
+2020-10-24,Zambia,Zambia Holiday #13
+2020-12-25,Zambia,Zambia Holiday #14
+2020-01-01,Zimbabwe,Zimbabwe Holiday #1
+2020-02-21,Zimbabwe,Zimbabwe Holiday #2
+2020-04-10,Zimbabwe,Zimbabwe Holiday #3
+2020-04-13,Zimbabwe,Zimbabwe Holiday #4
+2020-04-18,Zimbabwe,Zimbabwe Holiday #5
+2020-05-01,Zimbabwe,Zimbabwe Holiday #6
+2020-05-25,Zimbabwe,Zimbabwe Holiday #7
+2020-08-10,Zimbabwe,Zimbabwe Holiday #8
+2020-08-11,Zimbabwe,Zimbabwe Holiday #9
+2020-12-22,Zimbabwe,Zimbabwe Holiday #10
+2020-12-25,Zimbabwe,Zimbabwe Holiday #11
+2020-12-26,Zimbabwe,Zimbabwe Holiday #12
+2020-01-07,Ethiopia,Ethiopia Holiday #1
+2020-01-19,Ethiopia,Ethiopia Holiday #2
+2020-03-02,Ethiopia,Ethiopia Holiday #3
+2020-04-17,Ethiopia,Ethiopia Holiday #4
+2020-04-19,Ethiopia,Ethiopia Holiday #5
+2020-05-01,Ethiopia,Ethiopia Holiday #6
+2020-05-05,Ethiopia,Ethiopia Holiday #7
+2020-05-24,Ethiopia,Ethiopia Holiday #8
+2020-05-28,Ethiopia,Ethiopia Holiday #9
+2020-07-31,Ethiopia,Ethiopia Holiday #10
+2020-09-12,Ethiopia,Ethiopia Holiday #11
+2020-09-28,Ethiopia,Ethiopia Holiday #12
+2020-10-29,Ethiopia,Ethiopia Holiday #13
+2020-02-17,Libya,Libya Holiday #1
+2020-05-01,Libya,Libya Holiday #2
+2020-05-24,Libya,Libya Holiday #3
+2020-05-25,Libya,Libya Holiday #4
+2020-07-30,Libya,Libya Holiday #5
+2020-07-31,Libya,Libya Holiday #6
+2020-08-01,Libya,Libya Holiday #7
+2020-08-02,Libya,Libya Holiday #8
+2020-08-20,Libya,Libya Holiday #9
+2020-09-16,Libya,Libya Holiday #10
+2020-10-23,Libya,Libya Holiday #11
+2020-10-29,Libya,Libya Holiday #12
+2020-12-24,Libya,Libya Holiday #13
