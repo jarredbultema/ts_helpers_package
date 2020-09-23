@@ -1,0 +1,245 @@
+-- PostgreSQL query to aggregate and select desired data for Retail Demand Forecasting Tutorial
+
+-- Select the desired transactions based on status and category
+DROP TABLE IF EXISTS good_transactions
+CREATE TEMP TABLE good_transactions AS
+-- CREATE TABLE good_transactions AS
+    SELECT
+        status.*
+    FROM "Tutorial_demand_forecasting_transaction_status" as status
+    WHERE status.transaction = 'Good'
+    AND status.category = 'Retail'
+    AND status.store_category = 'Type_A'
+
+
+-- Select the desired market information
+-- Adjust the date to correspond to the last day of each month
+DROP TABLE IF EXISTS market_sales
+CREATE TEMP TABLE market_sales AS
+-- CREATE TABLE market_sales AS
+    SELECT
+        (market."Month"::DATE + interval '1 month -1 day') as reported_date,
+        market.metro_area, market.county_1,
+        market.total_market_sales
+    FROM "Tutorial_demand_forecasting_market_data" as market
+    WHERE market.category_type = 'Type_A'
+
+
+-- Join and Select the desired information from the contents and items tables
+DROP TABLE IF EXISTS full_sales
+CREATE TEMP TABLE full_sales AS
+-- CREATE TABLE full_sales AS
+    SELECT
+           gt.invoice,
+           gt.date,
+           gt.day,
+           gt.time,
+           gt.campaign,
+           ct.package_id,
+           ct.qty,
+           ct.unit_price,
+           ct.sale_amount,
+           it.item_name
+    FROM good_transactions as gt
+    LEFT JOIN "Tutorial_demand_forecasting_transactions_contents" as ct
+           ON gt.invoice = ct.invoice
+    LEFT JOIN "Tutorial_demand_forecasting_items" as it
+           ON ct.package_id = it.package_id
+
+
+-- create a table for aggregate information on package_id counts
+DROP TABLE IF EXISTS date_item_package
+CREATE TEMP TABLE date_item_package AS
+-- CREATE TABLE date_item_package AS
+    SELECT
+        full_sales.date,
+        full_sales.item_name,
+        full_sales.package_id,
+        full_sales.date::text||'_'||full_sales.item_name::text as agg_values,
+        COUNT(distinct full_sales.*) as count_package
+    FROM full_sales
+    GROUP BY 1,2,3,4
+
+
+-- create a table for aggregate information on lowest occurrence package_id
+DROP TABLE IF EXISTS min_package
+CREATE TEMP TABLE min_package AS
+-- CREATE TABLE min_package AS
+    SELECT
+        DISTINCT ON (agg_values)
+        date,
+        item_name,
+        package_id,
+        count_package
+    FROM date_item_package
+    ORDER BY agg_values ASC, count_package ASC
+
+
+-- create a table for aggregate information on highest occurrence package_id
+DROP TABLE IF EXISTS max_package
+CREATE TEMP TABLE max_package AS
+-- CREATE TABLE max_package AS
+SELECT
+    DISTINCT ON (agg_values)
+    date,
+    item_name,
+    package_id,
+    count_package
+FROM date_item_package
+ORDER BY agg_values ASC, count_package DESC
+
+
+-- create a table for aggregate information on number of unique package_id
+DROP TABLE IF EXISTS unique_package
+CREATE TEMP TABLE unique_package AS
+-- CREATE TABLE unique_package AS
+SELECT
+    full_sales.date,
+    full_sales.item_name,
+    COUNT(DISTINCT full_sales.package_id) as count_unique_package_id
+FROM full_sales
+GROUP BY 1,2
+
+
+-- join aggregate package_id information in a single table
+DROP TABLE IF EXISTS temp_package_minmax
+CREATE TEMP TABLE temp_package_minmax AS
+-- CREATE TABLE temp_package_minmax AS
+    SELECT
+           min_package.date,
+           min_package.item_name,
+           min_package.package_id as min_package_id,
+           min_package.count_package as min_package_count,
+           max_package.package_id as max_package_id,
+           max_package.count_package as max_package_count,
+           unique_package.count_unique_package_id
+    FROM min_package
+    LEFT JOIN max_package
+    ON min_package.date = max_package.date
+    AND min_package.item_name = max_package.item_name
+    LEFT JOIN unique_package
+    ON min_package.date = unique_package.date
+    AND min_package.item_name = unique_package.item_name
+
+
+-- create a table for aggregate information on campaign counts
+DROP TABLE IF EXISTS date_item_campaign
+CREATE TEMP TABLE date_item_campaign AS
+-- CREATE TABLE date_item_campaign AS
+    SELECT
+        full_sales.date,
+        full_sales.item_name,
+        full_sales.campaign,
+        full_sales.date::text||'_'||full_sales.item_name::text as agg_values,
+        COUNT(distinct full_sales.*) as count_campaign
+    FROM full_sales
+    GROUP BY 1,2,3,4;
+
+
+-- create a table for aggregate information on lowest occurrence campaign
+DROP TABLE IF EXISTS min_campaign
+CREATE TEMP TABLE min_campaign AS
+-- CREATE TABLE min_campaign AS
+    SELECT
+        DISTINCT ON (agg_values)
+        date,
+        item_name,
+        campaign,
+        count_campaign
+    FROM date_item_campaign
+    ORDER BY agg_values ASC, count_campaign ASC
+
+
+-- create a table for aggregate information on highest occurrence campaign
+DROP TABLE IF EXISTS max_campaign
+CREATE TEMP TABLE max_campaign AS
+-- CREATE TABLE max_campaign AS
+    SELECT
+        DISTINCT ON (agg_values)
+        date,
+        item_name,
+        campaign,
+        count_campaign
+    FROM date_item_campaign
+    ORDER BY agg_values ASC, count_campaign DESC
+
+
+-- create a table for aggregate information on unique campaign
+DROP TABLE IF EXISTS unique_campaign
+CREATE TEMP TABLE unique_campaign AS
+-- CREATE TABLE unique_campaign AS
+    SELECT
+        full_sales.date,
+        full_sales.item_name,
+        COUNT(DISTINCT full_sales.campaign) as count_unique_campaign
+    FROM full_sales
+    GROUP BY 1,2
+
+
+-- join aggregate campaign information in a single table
+DROP TABLE IF EXISTS temp_campaign_minmax
+CREATE TEMP TABLE temp_campaign_minmax AS
+-- CREATE TABLE temp_campaign_minmax AS
+    SELECT
+           min_campaign.date,
+           min_campaign.item_name,
+           min_campaign.campaign as min_campaign,
+           min_campaign.count_campaign as min_campaign_count,
+           max_campaign.campaign as max_campaign,
+           max_campaign.count_campaign as max_campaign_count,
+           unique_campaign.count_unique_campaign
+    FROM min_campaign
+    LEFT JOIN max_campaign
+    ON min_campaign.date = max_campaign.date
+    AND min_campaign.item_name = max_campaign.item_name
+    LEFT JOIN unique_campaign
+    ON min_campaign.date = unique_campaign.date
+    AND min_campaign.item_name = unique_campaign.item_name
+
+
+-- join and aggregate all information into a single output table
+DROP TABLE IF EXISTS demand_forecasting_aggregate_sales
+-- CREATE TABLE demand_forecasting_aggregate_sales AS
+    SELECT
+        full_sales.date::DATE,
+        MAX(full_sales.day) as day,
+        full_sales.item_name,
+        (ARRAY_AGG(mmp.count_unique_package_id))[1] as package_id_unique,
+        (ARRAY_AGG(mmp.min_package_id))[1] as min_package_id,
+        (ARRAY_AGG(mmp.max_package_id))[1] as max_package_id,
+        (ARRAY_AGG(mmc.count_unique_campaign))[1] as campaign_unique,
+        (ARRAY_AGG(mmc.min_campaign))[1] as min_campaign,
+        (ARRAY_AGG(mmc.max_campaign))[1] as max_campaign,
+        MIN(full_sales.qty) as qty_min,
+        AVG(full_sales.qty) as qty_mean,
+        MAX(full_sales.qty) as qty_max,
+        STDDEV(full_sales.qty) as qty_stdev,
+        COUNT(DISTINCT qty) as qty_unique,
+        SUM(qty) as qty_sum,
+        MIN(full_sales.unit_price) as unit_price_min,
+        AVG(full_sales.unit_price) as unit_price_mean,
+        MAX(full_sales.unit_price) as unit_price_max,
+        STDDEV(full_sales.unit_price) as unit_price_stdev,
+        COUNT(DISTINCT full_sales.unit_price) as unit_price_unique,
+        SUM(full_sales.unit_price) as unit_price_sum,
+        MIN(full_sales.sale_amount) as sale_amount_min,
+        AVG(full_sales.sale_amount) as sale_amount_mean,
+        MAX(full_sales.sale_amount) as sale_amount_max,
+        STDDEV(full_sales.sale_amount) as sale_amount_stdev,
+        COUNT(DISTINCT full_sales.sale_amount) as sale_amount_unique,
+        SUM(full_sales.sale_amount) as sale_amount_sum,
+        AVG(market_sales.metro_area) as metro_area,
+        AVG(market_sales.county_1) as county_1,
+        AVG(market_sales.total_market_sales) as total_market_sales
+    FROM full_sales
+    LEFT JOIN temp_package_minmax as mmp
+    ON full_sales.date = mmp.date
+    AND full_sales.item_name = mmp.item_name
+    LEFT JOIN temp_campaign_minmax as mmc
+    ON full_sales.date = mmc.date
+    AND full_sales.item_name = mmc.item_name
+    LEFT JOIN market_sales
+    ON full_sales.date::DATE = market_sales.reported_date
+    GROUP BY full_sales.date,full_sales.item_name
+
+;

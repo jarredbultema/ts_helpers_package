@@ -1,0 +1,209 @@
+SELECT
+    status.*
+INTO TEMP TABLE good_transactions 
+FROM "Tutorial_demand_forecasting_transaction_status" as status
+WHERE status.transaction = 'Good'
+AND status.category = 'Retail'
+AND status.store_category = 'Type_A';
+
+
+SELECT
+    (market."Month"::DATE + interval '1 month -1 day') as reported_date,
+    market.metro_area, market.county_1,
+    market.total_market_sales
+INTO TEMP TABLE market_sales
+FROM "Tutorial_demand_forecasting_market_data" as market
+WHERE market.category_type = 'Type_A';
+
+
+SELECT
+   gt.invoice,
+   gt.date,
+   gt.day,
+   gt.time,
+   gt.campaign,
+   ct.package_id,
+   ct.qty,
+   ct.unit_price,
+   ct.sale_amount,
+   it.item_name
+INTO TEMP TABLE full_sales
+FROM good_transactions as gt
+LEFT JOIN "Tutorial_demand_forecasting_transactions_contents" as ct
+       ON gt.invoice = ct.invoice
+LEFT JOIN "Tutorial_demand_forecasting_items" as it
+       ON ct.package_id = it.package_id;
+
+
+
+
+SELECT
+    full_sales.date,
+    full_sales.item_name,
+    full_sales.package_id,
+    full_sales.date::text||'_'||full_sales.item_name::text as agg_values,
+    COUNT(distinct full_sales.*) as count_package
+INTO TEMP TABLE date_item_package
+FROM full_sales
+GROUP BY 1,2,3,4;
+
+
+
+
+SELECT
+    DISTINCT ON (agg_values)
+    date,
+    item_name,
+    package_id,
+    count_package
+INTO TEMP TABLE min_package
+FROM date_item_package
+ORDER BY agg_values ASC, count_package ASC;
+
+
+SELECT
+    DISTINCT ON (agg_values)
+    date,
+    item_name,
+    package_id,
+    count_package
+INTO TEMP TABLE max_package
+FROM date_item_package
+ORDER BY agg_values ASC, count_package DESC;
+
+
+
+SELECT
+    full_sales.date,
+    full_sales.item_name,
+    COUNT(DISTINCT full_sales.package_id) as count_unique_package_id
+INTO TEMP TABLE unique_package
+FROM full_sales
+GROUP BY 1,2;
+
+
+
+
+SELECT
+       min_package.date,
+       min_package.item_name,
+       min_package.package_id as min_package_id,
+       min_package.count_package as min_package_count,
+       max_package.package_id as max_package_id,
+       max_package.count_package as max_package_count,
+       unique_package.count_unique_package_id
+INTO TEMP TABLE temp_package_minmax
+FROM min_package
+LEFT JOIN max_package
+ON min_package.date = max_package.date
+AND min_package.item_name = max_package.item_name
+LEFT JOIN unique_package
+ON min_package.date = unique_package.date
+AND min_package.item_name = unique_package.item_name;
+
+
+
+SELECT
+    full_sales.date,
+    full_sales.item_name,
+    full_sales.campaign,
+    full_sales.date::text||'_'||full_sales.item_name::text as agg_values,
+    COUNT(distinct full_sales.*) as count_campaign
+INTO TEMP TABLE date_item_campaign
+FROM full_sales
+GROUP BY 1,2,3,4;
+
+
+
+SELECT
+    DISTINCT ON (agg_values)
+    date,
+    item_name,
+    campaign,
+    count_campaign
+INTO TEMP TABLE min_campaign
+FROM date_item_campaign
+ORDER BY agg_values ASC, count_campaign ASC;
+
+
+
+SELECT
+    DISTINCT ON (agg_values)
+    date,
+    item_name,
+    campaign,
+    count_campaign
+INTO TEMP TABLE max_campaign
+FROM date_item_campaign
+ORDER BY agg_values ASC, count_campaign DESC;
+
+
+
+SELECT
+    full_sales.date,
+    full_sales.item_name,
+    COUNT(DISTINCT full_sales.campaign) as count_unique_campaign
+INTO TEMP TABLE unique_campaign
+FROM full_sales
+GROUP BY 1,2;
+
+
+
+SELECT
+       min_campaign.date,
+       min_campaign.item_name,
+       min_campaign.campaign as min_campaign,
+       min_campaign.count_campaign as min_campaign_count,
+       max_campaign.campaign as max_campaign,
+       max_campaign.count_campaign as max_campaign_count,
+       unique_campaign.count_unique_campaign
+INTO TEMP TABLE temp_campaign_minmax
+FROM min_campaign
+LEFT JOIN max_campaign
+ON min_campaign.date = max_campaign.date
+AND min_campaign.item_name = max_campaign.item_name
+LEFT JOIN unique_campaign
+ON min_campaign.date = unique_campaign.date
+AND min_campaign.item_name = unique_campaign.item_name;
+
+SELECT
+    full_sales.date::DATE,
+    MAX(full_sales.day) as day,
+    full_sales.item_name,
+    (ARRAY_AGG(mmp.count_unique_package_id))[1] as package_id_unique,
+    (ARRAY_AGG(mmp.min_package_id))[1] as min_package_id,
+    (ARRAY_AGG(mmp.max_package_id))[1] as max_package_id,
+    (ARRAY_AGG(mmc.count_unique_campaign))[1] as campaign_unique,
+    (ARRAY_AGG(mmc.min_campaign))[1] as min_campaign,
+    (ARRAY_AGG(mmc.max_campaign))[1] as max_campaign,
+    MIN(full_sales.qty) as qty_min,
+    AVG(full_sales.qty) as qty_mean,
+    MAX(full_sales.qty) as qty_max,
+    STDDEV(full_sales.qty) as qty_stdev,
+    COUNT(DISTINCT qty) as qty_unique,
+    SUM(qty) as qty_sum,
+    MIN(full_sales.unit_price) as unit_price_min,
+    AVG(full_sales.unit_price) as unit_price_mean,
+    MAX(full_sales.unit_price) as unit_price_max,
+    STDDEV(full_sales.unit_price) as unit_price_stdev,
+    COUNT(DISTINCT full_sales.unit_price) as unit_price_unique,
+    SUM(full_sales.unit_price) as unit_price_sum,
+    MIN(full_sales.sale_amount) as sale_amount_min,
+    AVG(full_sales.sale_amount) as sale_amount_mean,
+    MAX(full_sales.sale_amount) as sale_amount_max,
+    STDDEV(full_sales.sale_amount) as sale_amount_stdev,
+    COUNT(DISTINCT full_sales.sale_amount) as sale_amount_unique,
+    SUM(full_sales.sale_amount) as sale_amount_sum,
+    AVG(market_sales.metro_area) as metro_area,
+    AVG(market_sales.county_1) as county_1,
+    AVG(market_sales.total_market_sales) as total_market_sales
+FROM full_sales
+LEFT JOIN temp_package_minmax as mmp
+ON full_sales.date = mmp.date
+AND full_sales.item_name = mmp.item_name
+LEFT JOIN temp_campaign_minmax as mmc
+ON full_sales.date = mmc.date
+AND full_sales.item_name = mmc.item_name
+LEFT JOIN market_sales
+ON full_sales.date::DATE = market_sales.reported_date
+GROUP BY full_sales.date,full_sales.item_name;
