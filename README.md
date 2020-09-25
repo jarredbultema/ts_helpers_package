@@ -15,12 +15,3 @@
 #### This python package contains numerous functions to enable the user to easily scale from one to thousands of DataRobot projects starting with data preparation and continuing through modeling, model evaluation, iterative performance improvements, visualization of results, deployment of models, and serving ongoing predictions.
 
 #### A detailed Table of Contents describes all functions present and the documentation string for each function. Detailed tutorials are also available to demonstrate the use of this ts_helpers package and all of the functions contained within.
-
-## Dependencies
-
-#### datarobot_ts_helpers package requires:
-#### plotly (`pip install plotly`)
-#### statsmodels (`pip install statsmodels`)
-#### umap-learn
-#### ipywidgets
-#### python >= 3.6

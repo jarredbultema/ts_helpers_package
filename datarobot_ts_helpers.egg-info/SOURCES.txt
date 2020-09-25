@@ -14,5 +14,6 @@ datarobot_ts_helpers/ts_projects.py
 datarobot_ts_helpers.egg-info/PKG-INFO
 datarobot_ts_helpers.egg-info/SOURCES.txt
 datarobot_ts_helpers.egg-info/dependency_links.txt
+datarobot_ts_helpers.egg-info/requires.txt
 datarobot_ts_helpers.egg-info/top_level.txt
 package/__init__.py

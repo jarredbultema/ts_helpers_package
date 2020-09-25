@@ -1,8 +1,15 @@
-python>=3.5
-datarobot>=2.0
-statsmodels>=0.12.0
-plotly_requires>=4.10.0
-umap-learn_requires>=0.3.10
-ipywidgets_requires>=7.2
-scikit-learn>=0.22.1  
-psycopg2>=2.8.5
+###### Requirements without Version Specifiers ######
+
+
+###### Requirements with Version Specifiers ######
+setuptools >= 40.3.0
+datarobot >= 2.0
+statsmodels >= 0.9
+plotly >= 4.10
+umap-learn >= 0.3.10
+ipywidgets >= 7.2.1
+scikit-learn >= 0.22.1  
+psycopg2 >= 2.7
+matplotlib >= 2.2
+seaborn >= 0.9
+xlrd >= 1.0

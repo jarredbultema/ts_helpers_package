@@ -1732,8 +1732,8 @@ def plot_all_featurelist_curves(df, ts_settings, data_subset='allBacktests', met
             ['Featurelist_length', 'Project_Name'], ascending=False)  # [~df.isnull().any(axis=1)]
 
     print(mean(df[metric_column]))
-    num = df['Project_Name'].unique().shape[0]
+    num = df['Project_Name'].nunique()
     fig = px.line(df, x='Featurelist_length', y=df[metric_column], color='Project_Name')
     fig.update_layout(title_text=f'Feature List Selection Curves for {num} Projects')
-    fig.update_layout(yaxis=dict(range=[min(matric_column)* 0.9,max(matric_column)* 1.1]))
+    fig.update_layout(yaxis=dict(range=[min(metric_column)* 0.9,max(metric_column)* 1.1]))
     fig.show()
