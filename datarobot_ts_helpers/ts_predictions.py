@@ -265,10 +265,10 @@ def get_or_request_predictions(
             print(f'*** There are no rows to score in {p.project_name} using {start_date} ... ***\n')
             continue
 
-#         start = m.training_info['prediction_training_start_date'] # 
-        start = dr.DatetimePartitioning.get(p.id).holdout_start_date # m.training_info['prediction_training_start_date'] # 
-#         end = m.training_info['prediction_training_end_date'] # 
-        end= dr.DatetimePartitioning.get(p.id).holdout_end_date # m.training_info['prediction_training_end_date'] # 
+        start = m.training_info['prediction_training_start_date'] # 
+#         start = dr.DatetimePartitioning.get(p.id).holdout_start_date # m.training_info['prediction_training_start_date'] # 
+        end = m.training_info['prediction_training_end_date'] # 
+#         end= dr.DatetimePartitioning.get(p.id).holdout_end_date # m.training_info['prediction_training_end_date'] # 
         if start_date is None:
             start_date = start.date()
         if end_date is None:
