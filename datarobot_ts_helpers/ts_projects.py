@@ -600,7 +600,7 @@ def get_cluster_acc(
     data_subset='allBacktests',
     include_blenders=True,
     metric=None,
-    acc_calc=rmse,
+    acc_calc=ts.rmse,
 ):
     """
     Get cluster-level and overall accuracy across multiple DataRobot projects
@@ -656,7 +656,7 @@ def get_cluster_acc(
     return groups
 
 
-def plot_cluster_acc(cluster_acc, ts_settings, data_subset='allBacktests', acc_calc=rmse):
+def plot_cluster_acc(cluster_acc, ts_settings, data_subset='allBacktests', acc_calc=ts.rmse):
     """
     Plots cluster-level and overall accuracy across multiple DataRobot projects
 
@@ -704,7 +704,7 @@ def get_series_acc(
     data_subset='allBacktests',
     include_blenders=True,
     metric=None,
-    acc_calc=rmse,
+    acc_calc=ts.rmse,
 ):
     """
     Get series-level and overall accuracy across multiple DataRobot projects
@@ -764,7 +764,7 @@ def get_series_acc(
     return groups
 
 
-def plot_preds_and_actuals(df, projects, ts_settings, fd_range=None, fd_agg= 'mean', fd= None, average= False, series_name= None, top=None, data_subset= 'allBacktests', include_blenders=False, metric= None, acc_calc=rmse):
+def plot_preds_and_actuals(df, projects, ts_settings, fd_range=None, fd_agg= 'mean', fd= None, average= False, series_name= None, top=None, data_subset= 'allBacktests', include_blenders=False, metric= None, acc_calc=ts.rmse):
     """
     Get series-level and overall accuracy across multiple DataRobot projects
 
@@ -889,7 +889,7 @@ def plot_preds_and_actuals(df, projects, ts_settings, fd_range=None, fd_agg= 'me
 
 
 
-def plot_series_acc(series_acc, ts_settings, data_subset='allBacktests', acc_calc=rmse, n=50):
+def plot_series_acc(series_acc, ts_settings, data_subset='allBacktests', acc_calc=ts.rmse, n=50):
     """
     Plots series-level and overall accuracy across multiple DataRobot projects
 
@@ -1333,13 +1333,13 @@ def plot_fd_accuracy(df, projects, ts_settings, data_subset='allBacktests', metr
     ], 'data_subset must be either allBacktests or holdout'
 
     mapper = {
-        'MAE': mae,
-        'SMAPE': smape,
-        'MAPE': mape,
-        'RMSE': rmse,
-        'Gamma Deviance': gamma_loss,
-        'Tweedie Deviance': tweedie_loss,
-        'Poisson Deviance': poisson_loss,
+        'MAE': ts.mae,
+        'SMAPE': ts.smape,
+        'MAPE': ts.mape,
+        'RMSE': ts.rmse,
+        'Gamma Deviance': ts.gamma_loss,
+        'Tweedie Deviance': ts.tweedie_loss,
+        'Poisson Deviance': ts.poisson_loss,
     }
 
     df = get_preds_and_actuals(
