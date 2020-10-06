@@ -600,7 +600,7 @@ def get_cluster_acc(
     data_subset='allBacktests',
     include_blenders=True,
     metric=None,
-    acc_calc=ts.rmse,
+    acc_calc=rmse,
 ):
     """
     Get cluster-level and overall accuracy across multiple DataRobot projects
@@ -656,7 +656,7 @@ def get_cluster_acc(
     return groups
 
 
-def plot_cluster_acc(cluster_acc, ts_settings, data_subset='allBacktests', acc_calc=ts.rmse):
+def plot_cluster_acc(cluster_acc, ts_settings, data_subset='allBacktests', acc_calc=rmse):
     """
     Plots cluster-level and overall accuracy across multiple DataRobot projects
 
@@ -704,7 +704,7 @@ def get_series_acc(
     data_subset='allBacktests',
     include_blenders=True,
     metric=None,
-    acc_calc=ts.rmse,
+    acc_calc=rmse,
 ):
     """
     Get series-level and overall accuracy across multiple DataRobot projects
@@ -764,7 +764,7 @@ def get_series_acc(
     return groups
 
 
-def plot_preds_and_actuals(df, projects, ts_settings, fd_range=None, fd_agg= 'mean', fd= None, average= False, series_name= None, top=None, data_subset= 'allBacktests', include_blenders=False, metric= None, acc_calc=ts.rmse):
+def plot_preds_and_actuals(df, projects, ts_settings, fd_range=None, fd_agg= 'mean', fd= None, average= False, series_name= None, top=None, data_subset= 'allBacktests', include_blenders=False, metric= None, acc_calc=rmse):
     """
     Get series-level and overall accuracy across multiple DataRobot projects
 
@@ -889,7 +889,7 @@ def plot_preds_and_actuals(df, projects, ts_settings, fd_range=None, fd_agg= 'me
 
 
 
-def plot_series_acc(series_acc, ts_settings, data_subset='allBacktests', acc_calc=ts.rmse, n=50):
+def plot_series_acc(series_acc, ts_settings, data_subset='allBacktests', acc_calc=rmse, n=50):
     """
     Plots series-level and overall accuracy across multiple DataRobot projects
 
@@ -1333,13 +1333,13 @@ def plot_fd_accuracy(df, projects, ts_settings, data_subset='allBacktests', metr
     ], 'data_subset must be either allBacktests or holdout'
 
     mapper = {
-        'MAE': ts.mae,
-        'SMAPE': ts.smape,
-        'MAPE': ts.mape,
-        'RMSE': ts.rmse,
-        'Gamma Deviance': ts.gamma_loss,
-        'Tweedie Deviance': ts.tweedie_loss,
-        'Poisson Deviance': ts.poisson_loss,
+        'MAE': mae,
+        'SMAPE': smape,
+        'MAPE': mape,
+        'RMSE': rmse,
+        'Gamma Deviance': gamma_loss,
+        'Tweedie Deviance': tweedie_loss,
+        'Poisson Deviance': poisson_loss,
     }
 
     df = get_preds_and_actuals(
@@ -1630,7 +1630,11 @@ def run_feature_selection_projects(df,
         if plot:
             plot_featurelist_learning_curve(data, data_subset='allBacktests', metric='RMSE')
         results = results.append(data)
-
+    
+    # score backtests on models
+    models = [m.score_backtests() for m in results['Model_ID'].unique().tolist()]
+    print(f'Scoring backtests for {len(models)} models retrained with reduced features...')
+        
     return results # .drop_duplicates()
 
 
@@ -1668,12 +1672,12 @@ def plot_featurelist_learning_curve(df, data_subset='allBacktests', metric= None
     
     if data_subset == 'allBacktests':
         data_subset = data_subset.title().replace('b','_B')
-        metric_column = data_subset + "_" + metric.upper()
+        metric_column = data_subset + "_" + metric
         df[metric_column] = df[metric_column].apply(lambda x: mean([v for v in x if v != None]))
         df = df[['Feature_length', metric_column]].drop_duplicates()
     else:
         data_subset = data_subset.title()
-        metric_column = data_subset + "_" + metric.upper()
+        metric_column = data_subset + "_" + metric
         df = df[['Feature_length', metric_column]].drop_duplicates()
 
     df.drop_duplicates(inplace= True)
@@ -1687,7 +1691,7 @@ def plot_featurelist_learning_curve(df, data_subset='allBacktests', metric= None
 
 def plot_all_featurelist_curves(df, ts_settings, data_subset='allBacktests', metric='RMSE'):
     """
-    Plot all reduced featurelists on the same curve
+    Plot all reduced featurelists curves on the same plot
 
     df: pandas df
     ts_settings: dict
@@ -1722,18 +1726,19 @@ def plot_all_featurelist_curves(df, ts_settings, data_subset='allBacktests', met
     if data_subset == 'allBacktests':
         data_subset = data_subset.capitalize().replace('b', '_B')
         metric_column = data_subset + "_" + metric
-        df[metric_column] = df[metric_column].apply(lambda x: mean([v for v in x if v != None]))
+        df[metric_column] = df[metric_column].apply(lambda x: np.mean([(float(v)) for v in x if v != None]))
         df = df[['Project_Name', 'Featurelist_length', metric_column]].drop_duplicates().sort_values(
-            ['Featurelist_length', 'Project_Name'], ascending=False)  # [~df.isnull().any(axis=1)]
+            ['Featurelist_length', 'Project_Name'], ascending=[False, True])  
     else:
         data_subset = data_subset.capitalize()
         metric_column = data_subset + "_" + metric
         df = df[['Project_Name', 'Featurelist_length', metric_column]].drop_duplicates().sort_values(
-            ['Featurelist_length', 'Project_Name'], ascending=False)  # [~df.isnull().any(axis=1)]
+            ['Featurelist_length', 'Project_Name'], ascending=[False, True])  
 
-    print(mean(df[metric_column]))
+    print(metric_column)
     num = df['Project_Name'].nunique()
-    fig = px.line(df, x='Featurelist_length', y=df[metric_column], color='Project_Name')
+    fig = px.line(df, x='Featurelist_length', y=metric_column, color='Project_Name')
     fig.update_layout(title_text=f'Feature List Selection Curves for {num} Projects')
-    fig.update_layout(yaxis=dict(range=[min(metric_column)* 0.9,max(metric_column)* 1.1]))
+    fig.update_layout(yaxis=dict(range=[min(df[metric_column].values)* 0.8,max(df[metric_column].values)* 1.1]))
+    fig.update_layout(xaxis=dict(range=[0, max(df['Featurelist_length'].values)+1]))
     fig.show()
