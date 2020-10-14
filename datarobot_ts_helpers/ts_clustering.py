@@ -13,9 +13,9 @@ from statsmodels.tsa.stattools import pacf
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 import umap
 
-from .ts_metrics import *
-from .ts_modeling import create_dr_project
-from .ts_projects import get_preds_and_actuals
+from ts_metrics import *
+from ts_modeling import create_dr_project
+from ts_projects import get_preds_and_actuals
 
 
 ####################

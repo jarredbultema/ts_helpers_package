@@ -10,7 +10,7 @@ from pandas.tseries.holiday import (
 )
 import plotly.express as px
 
-from .ts_data_quality import get_timestep
+from ts_data_quality import get_timestep
 
 
 #####################

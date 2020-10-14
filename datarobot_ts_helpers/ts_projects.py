@@ -5,10 +5,10 @@ import plotly.graph_objects as go
 from statistics import mean 
 import re
 
-from .ts_metrics import *
-from .ts_data_quality import *
-from .ts_data_quality import _cut_series_by_rank
-from .ts_modeling import *
+from ts_metrics import *
+from ts_data_quality import *
+from ts_data_quality import _cut_series_by_rank
+from ts_modeling import *
 
 
 ######################

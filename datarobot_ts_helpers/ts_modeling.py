@@ -5,8 +5,8 @@ import datarobot as dr
 import numpy as np
 import pandas as pd
 
-from .ts_data_quality import get_timestep
-from .ts_projects import *
+from ts_data_quality import get_timestep
+from ts_projects import *
 
 
 ###################

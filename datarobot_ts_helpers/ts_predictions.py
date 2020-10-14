@@ -2,7 +2,7 @@ import datarobot as dr
 import pandas as pd
 import numpy as np
 
-from .ts_projects import get_top_models_from_projects
+from ts_projects import get_top_models_from_projects
 
 
 ###############

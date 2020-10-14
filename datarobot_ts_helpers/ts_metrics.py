@@ -33,11 +33,11 @@ def mae(act, pred, weight=None):
         return mae
 
 
-def mape(act, pred, nan='ignore'):
+def mape(act, pred, nan="ignore"):
     """Mean Absolute Percentage Error"""
     # ignore NAN (drop rows), do nothing, replace Nan with 0
-    if nan not in ['ignore', 'set_to_zero', 'error']:
-        raise ValueError(f'{nan} must be either ignore, set_to_zero, or error')
+    if nan not in ["ignore", "set_to_zero", "error"]:
+        raise ValueError(f"{nan} must be either ignore, set_to_zero, or error")
 
     act, pred = np.array(act), np.array(pred)
     pred = pred.astype(np.float64, copy=False)
@@ -45,9 +45,9 @@ def mape(act, pred, nan='ignore'):
     d = act
     ape = n / d
 
-    if nan == 'set_to_zero':
+    if nan == "set_to_zero":
         ape[~np.isfinite(ape)] = 0
-    elif nan == 'ignore':
+    elif nan == "ignore":
         ape = ape[np.isfinite(ape)]
 
     smape = np.mean(ape)
@@ -113,7 +113,7 @@ def tweedie_loss(act, pred, weight=None, p=1.5):
     """tweedie deviance for p = 1.5 only"""
 
     if p <= 1 or p >= 2:
-        raise ValueError('p equal to %s is not supported' % p)
+        raise ValueError("p equal to %s is not supported" % p)
 
     eps = 0.001
     pred = np.maximum(pred, eps)  # ensure predictions are strictly positive
@@ -131,9 +131,9 @@ def tweedie_loss(act, pred, weight=None, p=1.5):
 
 def poisson_loss(act, pred, weight=None):
     """
-        Poisson Deviance = 2*(act*log(act/pred)-(act-pred))
+    Poisson Deviance = 2*(act*log(act/pred)-(act-pred))
 
-        ONLY WORKS FOR POSITIVE RESPONSES
+    ONLY WORKS FOR POSITIVE RESPONSES
     """
     if len(pred.shape) > 1:
         pred = pred.ravel()

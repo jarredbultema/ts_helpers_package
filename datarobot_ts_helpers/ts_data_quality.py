@@ -78,9 +78,9 @@ class DataQualityCheck:
 
         """
 
-        date_col = self.settings['date_col']
-        series_id = self.settings['series_id']
-        target = self.settings['target']
+        date_col = self.settings["date_col"]
+        series_id = self.settings["series_id"]
+        target = self.settings["target"]
         df = self.df
 
         df[date_col] = pd.to_datetime(df[date_col])
@@ -89,28 +89,28 @@ class DataQualityCheck:
         # Create dictionary of helpful statistics
         stats = dict()
 
-        stats['rows'] = df.shape[0]
-        stats['columns'] = df.shape[1]
-        stats['min_' + str(target)] = df[target].min()
-        stats['max_' + str(target)] = df[target].max()
-        stats['series'] = len(df[series_id].unique())
-        stats['start_date'] = df[date_col].min()
-        stats['end_date'] = df[date_col].max()
-        stats['timespan'] = stats['end_date'] - stats['start_date']
-        stats['median_timestep'] = df.groupby([series_id])[date_col].diff().median()
-        stats['min_timestep'] = df.groupby([series_id])[date_col].diff().min()
-        stats['max_timestep'] = df.groupby([series_id])[date_col].diff().max()
+        stats["rows"] = df.shape[0]
+        stats["columns"] = df.shape[1]
+        stats["min_" + str(target)] = df[target].min()
+        stats["max_" + str(target)] = df[target].max()
+        stats["series"] = len(df[series_id].unique())
+        stats["start_date"] = df[date_col].min()
+        stats["end_date"] = df[date_col].max()
+        stats["timespan"] = stats["end_date"] - stats["start_date"]
+        stats["median_timestep"] = df.groupby([series_id])[date_col].diff().median()
+        stats["min_timestep"] = df.groupby([series_id])[date_col].diff().min()
+        stats["max_timestep"] = df.groupby([series_id])[date_col].diff().max()
 
         # create data for histogram of series lengths
-        stats['series_length'] = (
+        stats["series_length"] = (
             df.groupby([series_id])[date_col].apply(lambda x: x.max() - x.min())
-            / stats['median_timestep']
+            / stats["median_timestep"]
         )
 
         # calculate max gap per series
-        stats['series_max_gap'] = (
+        stats["series_max_gap"] = (
             df.groupby([series_id])[date_col].apply(lambda x: x.diff().max())
-            / stats['median_timestep']
+            / stats["median_timestep"]
         )
 
         self.stats = stats
@@ -119,7 +119,7 @@ class DataQualityCheck:
         """
         Calculate percentage of rows where target is np.nan
         """
-        target = self.settings['target']
+        target = self.settings["target"]
         df = self.df
 
         if np.isnan(missing_value):
@@ -127,8 +127,12 @@ class DataQualityCheck:
         else:
             percent_missing = sum(df[target] == missing_value) / len(df)
 
-        self.stats['percent_missing'] = percent_missing
-        print('{:0.2f}% of the rows are missing a target value'.format(percent_missing * 100))
+        self.stats["percent_missing"] = percent_missing
+        print(
+            "{:0.2f}% of the rows are missing a target value".format(
+                percent_missing * 100
+            )
+        )
 
     def get_zero_inflated_series(self, cutoff=0.99):
         """
@@ -139,19 +143,19 @@ class DataQualityCheck:
         List of series
 
         """
-        assert 0 < cutoff <= 1.0, 'cutoff must be between 0 and 1'
+        assert 0 < cutoff <= 1.0, "cutoff must be between 0 and 1"
 
-        series_id = self.settings['series_id']
-        target = self.settings['target']
+        series_id = self.settings["series_id"]
+        target = self.settings["target"]
         df = self.df
 
         df = df.groupby([series_id])[target].apply(lambda x: (x.dropna() == 0).mean())
         series = df[df >= cutoff].index.values
 
-        pct = len(series) / self.stats['series']
+        pct = len(series) / self.stats["series"]
 
         print(
-            '{:0.2f}% series have zeros in more than {:0.2f}% or more of the rows'.format(
+            "{:0.2f}% series have zeros in more than {:0.2f}% or more of the rows".format(
                 pct * 100, cutoff * 100
             )
         )
@@ -161,15 +165,17 @@ class DataQualityCheck:
         Calculate timesteps per series
 
         """
-        date_col = self.settings['date_col']
-        series_id = self.settings['series_id']
+        date_col = self.settings["date_col"]
+        series_id = self.settings["series_id"]
         df = self.df
 
         if self.stats is None:
-            print('calc_summary_stats must be run first!')
+            print("calc_summary_stats must be run first!")
 
         # create data for histogram of timestep
-        series_timesteps = df.groupby([series_id])[date_col].diff() / self.stats['median_timestep']
+        series_timesteps = (
+            df.groupby([series_id])[date_col].diff() / self.stats["median_timestep"]
+        )
         self.series_time_steps = series_timesteps
 
     def hierarchical_check(self):
@@ -177,25 +183,25 @@ class DataQualityCheck:
         Calculate percentage of series that appear on each timestep
 
         """
-        date_col = self.settings['date_col']
-        series_id = self.settings['series_id']
+        date_col = self.settings["date_col"]
+        series_id = self.settings["series_id"]
         df = self.df
 
         if self.stats is None:
-            print('calc_summary_stats must be run first!')
+            print("calc_summary_stats must be run first!")
 
         # Test if series passes the hierarchical check
         series_pct = df.groupby([date_col])[series_id].apply(
-            lambda x: x.count() / self.stats['series']
+            lambda x: x.count() / self.stats["series"]
         )
         if np.where(series_pct > 0.95, 1, 0).mean() > 0.95:
-            self.stats['passes_hierarchical_check'] = True
+            self.stats["passes_hierarchical_check"] = True
             print(
-                'Data passes hierarchical check! DataRobot hierarchical blueprints will run if you enable cross series features.'
+                "Data passes hierarchical check! DataRobot hierarchical blueprints will run if you enable cross series features."
             )
         else:
-            print('Data fails hierarchical check! No hierarchical blueprints will run.')
-            self.stats['passes_hierarchical_check'] = False
+            print("Data fails hierarchical check! No hierarchical blueprints will run.")
+            self.stats["passes_hierarchical_check"] = False
 
         self.series_pct = series_pct
 
@@ -204,40 +210,44 @@ class DataQualityCheck:
         Check if minimum target value is 0.0
 
         """
-        target = self.settings['target']
+        target = self.settings["target"]
         df = self.df
 
         if min(df[target]) == 0:
-            self.stats['passes_zero_inflated_check'] = False
-            print('The minimum target value is zero. Zero-Inflated blueprints will run.')
+            self.stats["passes_zero_inflated_check"] = False
+            print(
+                "The minimum target value is zero. Zero-Inflated blueprints will run."
+            )
         else:
-            self.stats['passes_zero_inflated_check'] = True
-            print('Minimum target value is <> 0. Zero-inflated blueprints will not run.')
+            self.stats["passes_zero_inflated_check"] = True
+            print(
+                "Minimum target value is <> 0. Zero-inflated blueprints will not run."
+            )
 
     def negative_values_check(self):
         """
         Check if any series contain negative values. If yes, identify and call out which series by id.
 
         """
-        series_id = self.settings['series_id']
-        target = self.settings['target']
+        series_id = self.settings["series_id"]
+        target = self.settings["target"]
         df = self.df
 
-        df['target_sign'] = np.sign(df[target])
+        df["target_sign"] = np.sign(df[target])
 
         try:
             # Get percent of series that have at least one negative value
             any_series_negative = (
-                df.groupby([series_id])['target_sign'].value_counts().unstack()[-1]
+                df.groupby([series_id])["target_sign"].value_counts().unstack()[-1]
             )
             series_negative_target_pct = np.sign(any_series_negative).sum() / len(
                 df[series_id].unique()
             )
-            df.drop('target_sign', axis=1, inplace=True)
-            self.stats['passes_negative_values_check'] = False
+            df.drop("target_sign", axis=1, inplace=True)
+            self.stats["passes_negative_values_check"] = False
 
             print(
-                '{0:.2f}% of series have at least one negative {1} value.'.format(
+                "{0:.2f}% of series have at least one negative {1} value.".format(
                     (round(series_negative_target_pct * 100), 2), target
                 )
             )
@@ -246,8 +256,8 @@ class DataQualityCheck:
             # print('{} contain negative values. Consider creating a seperate project for these series.'.format(any_series_negative[any_series_negative == 1].index.values))
         except:
             series_negative_target_pct = 0
-            self.stats['passes_negative_values_check'] = True
-            print('No negative values are contained in {}.'.format(target))
+            self.stats["passes_negative_values_check"] = True
+            print("No negative values are contained in {}.".format(target))
 
         self.series_negative_target_pct = series_negative_target_pct
 
@@ -256,16 +266,18 @@ class DataQualityCheck:
         Check if any series start after the the minimum datetime
 
         """
-        min_dates = self.df.groupby(self.settings['series_id'])[self.settings['date_col']].min()
-        new_series = min_dates > self.stats['start_date'] + dt.timedelta(days=30)
+        min_dates = self.df.groupby(self.settings["series_id"])[
+            self.settings["date_col"]
+        ].min()
+        new_series = min_dates > self.stats["start_date"] + dt.timedelta(days=30)
 
         if new_series.sum() == 0:
-            self.stats['series_introduced_over_time'] = False
-            print('No new series were introduced after the start of the training data')
+            self.stats["series_introduced_over_time"] = False
+            print("No new series were introduced after the start of the training data")
         else:
-            self.stats['series_introduced_over_time'] = True
+            self.stats["series_introduced_over_time"] = True
             print(
-                'Warning: You may encounter new series at prediction time. \n {0:.2f}% of the series appeared after the start of the training data'.format(
+                "Warning: You may encounter new series at prediction time. \n {0:.2f}% of the series appeared after the start of the training data".format(
                     round(new_series.mean() * 100, 0)
                 )
             )
@@ -275,16 +287,18 @@ class DataQualityCheck:
         Check if any series end before the maximum datetime
 
         """
-        max_dates = self.df.groupby(self.settings['series_id'])[self.settings['date_col']].max()
-        old_series = max_dates < self.stats['end_date'] - dt.timedelta(days=30)
+        max_dates = self.df.groupby(self.settings["series_id"])[
+            self.settings["date_col"]
+        ].max()
+        old_series = max_dates < self.stats["end_date"] - dt.timedelta(days=30)
 
         if old_series.sum() == 0:
-            self.stats['series_removed_over_time'] = False
-            print('No series were removed before the end of the training data')
+            self.stats["series_removed_over_time"] = False
+            print("No series were removed before the end of the training data")
         else:
-            self.stats['series_removed_over_time'] = True
+            self.stats["series_removed_over_time"] = True
             print(
-                'Warning: You may encounter fewer series at prediction time. \n {0:.2f}% of the series were removed before the end of the training data'.format(
+                "Warning: You may encounter fewer series at prediction time. \n {0:.2f}% of the series were removed before the end of the training data".format(
                     round(old_series.mean() * 100, 0)
                 )
             )
@@ -295,9 +309,9 @@ class DataQualityCheck:
 
         """
 
-        date_col = self.settings['date_col']
-        series_id = self.settings['series_id']
-        target = self.settings['target']
+        date_col = self.settings["date_col"]
+        series_id = self.settings["series_id"]
+        target = self.settings["target"]
         df = self.df
 
         new_df = remove_leading_and_trailing_zeros(
@@ -311,9 +325,9 @@ class DataQualityCheck:
         )
 
         if new_df.shape[0] < df.shape[0]:
-            print(f'Warning: Leading and trailing zeros detected within series')
+            print(f"Warning: Leading and trailing zeros detected within series")
         else:
-            print(f'No leading or trailing zeros detected within series')
+            print(f"No leading or trailing zeros detected within series")
 
     def duplicate_dates_check(self):
         """
@@ -321,38 +335,38 @@ class DataQualityCheck:
 
         """
 
-        duplicate_dates = self.df.groupby([self.settings['series_id'], self.settings['date_col']])[
-            self.settings['date_col']
-        ].count()
+        duplicate_dates = self.df.groupby(
+            [self.settings["series_id"], self.settings["date_col"]]
+        )[self.settings["date_col"]].count()
         duplicate_dates = duplicate_dates[duplicate_dates > 1]
         if len(duplicate_dates) == 0:
-            print(f'No duplicate timestamps detected within any series')
-            self.stats['passes_duplicate_timestamp_check'] = True
+            print(f"No duplicate timestamps detected within any series")
+            self.stats["passes_duplicate_timestamp_check"] = True
         else:
-            print('Warning: Data contains duplicate timestamps within series!')
-            self.stats['passes_duplicate_timestamp_check'] = False
+            print("Warning: Data contains duplicate timestamps within series!")
+            self.stats["passes_duplicate_timestamp_check"] = False
 
     def time_steps_gap_check(self):
         """
         Check for missing timesteps within each series
 
         """
-        date_col = self.settings['date_col']
-        series_id = self.settings['series_id']
+        date_col = self.settings["date_col"]
+        series_id = self.settings["series_id"]
         df = self.df
-        gap_size = self.stats['median_timestep']
+        gap_size = self.stats["median_timestep"]
 
         if self.stats is None:
-            print('calc_summary_stats must be run first!')
+            print("calc_summary_stats must be run first!")
 
         # check is series has any missing time steps
-        self.stats['pct_series_w_gaps'] = (
+        self.stats["pct_series_w_gaps"] = (
             df.groupby([series_id])[date_col].apply(lambda x: x.diff().max()) > gap_size
         ).mean()
 
         print(
-            '{0:.2f}% of series have at least one missing time step.'.format(
-                round(self.stats['pct_series_w_gaps'] * 100), 2
+            "{0:.2f}% of series have at least one missing time step.".format(
+                round(self.stats["pct_series_w_gaps"] * 100), 2
             )
         )
 
@@ -367,25 +381,25 @@ class DataQualityCheck:
         """
         project_time_unit = self.project_time_unit
         ts_settings = self.settings
-        date_col = ts_settings['date_col']
-        series_id = ts_settings['series_id']
+        date_col = ts_settings["date_col"]
+        series_id = ts_settings["series_id"]
 
-        df['indicator'] = 1
+        df["indicator"] = 1
         df = fill_missing_dates(df=df, ts_settings=ts_settings)
 
-        if project_time_unit == 'minute':
-            df['minute'] = df[date_col].dt.minute
-        elif project_time_unit == 'hour':
-            df['hour'] = df[date_col].dt.hour
-        elif project_time_unit == 'day':
-            df['day'] = df[date_col].dt.dayofweek
-        elif project_time_unit == 'week':
-            df['week'] = df[date_col].dt.week
-        elif project_time_unit == 'month':
-            df['month'] = df[date_col].dt.month
+        if project_time_unit == "minute":
+            df["minute"] = df[date_col].dt.minute
+        elif project_time_unit == "hour":
+            df["hour"] = df[date_col].dt.hour
+        elif project_time_unit == "day":
+            df["day"] = df[date_col].dt.dayofweek
+        elif project_time_unit == "week":
+            df["week"] = df[date_col].dt.week
+        elif project_time_unit == "month":
+            df["month"] = df[date_col].dt.month
 
-        sums = df.groupby([series_id, project_time_unit])['indicator'].sum()
-        counts = df.groupby([series_id, project_time_unit])['indicator'].agg(
+        sums = df.groupby([series_id, project_time_unit])["indicator"].sum()
+        counts = df.groupby([series_id, project_time_unit])["indicator"].agg(
             lambda x: x.fillna(0).count()
         )
 
@@ -402,7 +416,7 @@ class DataQualityCheck:
 
         """
 
-        date_col = self.settings['date_col']
+        date_col = self.settings["date_col"]
         df = self.df.copy()
 
         # first cast date column to a pandas datetime type
@@ -413,18 +427,18 @@ class DataQualityCheck:
         self.project_time_unit = project_time_unit
         self.project_time_step = project_time_step
 
-        print('Project Timestep: ', project_time_step, ' ', project_time_unit)
+        print("Project Timestep: ", project_time_step, " ", project_time_unit)
 
-        if project_time_unit == 'minute':
-            df['minute'] = df[date_col].dt.minute
-        elif project_time_unit == 'hour':
-            df['hour'] = df[date_col].dt.hour
-        elif project_time_unit == 'day':
-            df['day'] = df[date_col].dt.dayofweek
-        elif project_time_unit == 'week':
-            df['week'] = df[date_col].dt.week
-        elif project_time_unit == 'month':
-            df['month'] = df[date_col].dt.month
+        if project_time_unit == "minute":
+            df["minute"] = df[date_col].dt.minute
+        elif project_time_unit == "hour":
+            df["hour"] = df[date_col].dt.hour
+        elif project_time_unit == "day":
+            df["day"] = df[date_col].dt.dayofweek
+        elif project_time_unit == "week":
+            df["week"] = df[date_col].dt.week
+        elif project_time_unit == "month":
+            df["month"] = df[date_col].dt.month
 
         # Plot histogram of timesteps
         time_unit_counts = df[project_time_unit].value_counts()
@@ -436,10 +450,10 @@ class DataQualityCheck:
                 time_unit_percent,
                 x=time_unit_percent.index,
                 y=time_unit_percent.values,
-                title=f'Percentage of records per {project_time_unit}',
+                title=f"Percentage of records per {project_time_unit}",
             )
             fig.update_xaxes(title=project_time_unit)
-            fig.update_yaxes(title='Percentage')
+            fig.update_yaxes(title="Percentage")
             fig.show()
 
         # Detect uncommon time steps
@@ -452,9 +466,9 @@ class DataQualityCheck:
         )
 
         if len(uncommon_time_bins) > 0:
-            print(f'Uncommon {project_time_unit}s:', uncommon_time_bins)
+            print(f"Uncommon {project_time_unit}s:", uncommon_time_bins)
         else:
-            print('There are no uncommon time steps')
+            print("There are no uncommon time steps")
 
         # Detect irregular series
         df = df.loc[df[project_time_unit].isin(common_time_bins), :]
@@ -462,13 +476,13 @@ class DataQualityCheck:
 
         if len(irregular_series) > 0:
             print(
-                'Series are irregularly spaced. Projects will only be able to run in row-based mode!'
+                "Series are irregularly spaced. Projects will only be able to run in row-based mode!"
             )
-            self.stats['passes_irregular_check'] = False
+            self.stats["passes_irregular_check"] = False
         else:
-            self.stats['passes_irregular_check'] = True
+            self.stats["passes_irregular_check"] = True
             print(
-                'Timesteps are regularly spaced. You will be able to run projects in either time-based or row-based mode'
+                "Timesteps are regularly spaced. You will be able to run projects in either time-based or row-based mode"
             )
 
     def detect_periodicity(self, alpha=0.05):
@@ -479,58 +493,60 @@ class DataQualityCheck:
 
         timestep = self.project_time_unit
         df = self.df
-        target = self.settings['target']
-        date_col = self.settings['date_col']
-        metric = self.settings['metric']
+        target = self.settings["target"]
+        date_col = self.settings["date_col"]
+        metric = self.settings["metric"]
 
         metrics = {
-            'LogLoss': sm.families.Binomial(),
-            'RMSE': sm.families.Gaussian(),
-            'Poisson Deviance': sm.families.Poisson(),
-            'Gamma Deviance': sm.families.Gamma(),
+            "LogLoss": sm.families.Binomial(),
+            "RMSE": sm.families.Gaussian(),
+            "Poisson Deviance": sm.families.Poisson(),
+            "Gamma Deviance": sm.families.Gamma(),
         }
 
         periodicity = {
-            'moh': 'hourly',
-            'hod': 'daily',
-            'dow': 'weekly',
-            'dom': 'monthly',
-            'month': 'yearly',
+            "moh": "hourly",
+            "hod": "daily",
+            "dow": "weekly",
+            "dom": "monthly",
+            "month": "yearly",
         }
 
         try:
             loss = metrics[metric]
         except KeyError:
-            loss = metrics['RMSE']
+            loss = metrics["RMSE"]
 
         # Instantiate a glm with the default link function.
         df[date_col] = pd.to_datetime(df[date_col])
         df = df.loc[np.isfinite(df[target]), :].copy()
 
-        df['moh'] = df[date_col].dt.minute
-        df['hod'] = df[date_col].dt.hour
-        df['dow'] = df[date_col].dt.dayofweek
-        df['dom'] = df[date_col].dt.day
-        df['month'] = df[date_col].dt.month
+        df["moh"] = df[date_col].dt.minute
+        df["hod"] = df[date_col].dt.hour
+        df["dow"] = df[date_col].dt.dayofweek
+        df["dom"] = df[date_col].dt.day
+        df["month"] = df[date_col].dt.month
 
-        if timestep == 'minute':
-            inputs = ['moh', 'hod', 'dow', 'dom', 'month']
-        elif timestep == 'hour':
-            inputs = ['hod', 'dow', 'dom', 'month']
-        elif timestep == 'day':
-            inputs = ['dow', 'dom', 'month']
-        elif timestep == 'week':
-            inputs = ['month']
+        if timestep == "minute":
+            inputs = ["moh", "hod", "dow", "dom", "month"]
+        elif timestep == "hour":
+            inputs = ["hod", "dow", "dom", "month"]
+        elif timestep == "day":
+            inputs = ["dow", "dom", "month"]
+        elif timestep == "week":
+            inputs = ["month"]
         else:
-            raise ValueError('timestep has to be either minute, hour, day, week, or month')
+            raise ValueError(
+                "timestep has to be either minute, hour, day, week, or month"
+            )
 
         output = []
         for i in inputs:
             x = pd.DataFrame(df[i])
             y = df[target]
 
-            x = pd.get_dummies(x.astype('str'), drop_first=True)
-            x['const'] = 1
+            x = pd.get_dummies(x.astype("str"), drop_first=True)
+            x["const"] = 1
 
             clf = sm.GLM(endog=y, exog=x, family=loss)
             model = clf.fit()
@@ -541,26 +557,26 @@ class DataQualityCheck:
                 # return periodicity[i]
 
         if len(output) > 0:
-            print(f'Detected periodicity: {output}')
+            print(f"Detected periodicity: {output}")
         else:
-            print('No periodicity detected')
+            print("No periodicity detected")
 
     def run_all_checks(self):
         """
         Runner function to run all data checks in one call
 
         """
-        print('Running all data quality checks...\n')
+        print("Running all data quality checks...\n")
 
-        series = self.stats['series']
-        start_date = self.stats['start_date']
-        end_date = self.stats['end_date']
-        rows = self.stats['rows']
-        cols = self.stats['columns']
+        series = self.stats["series"]
+        start_date = self.stats["start_date"]
+        end_date = self.stats["end_date"]
+        rows = self.stats["rows"]
+        cols = self.stats["columns"]
 
-        print(f'There are {rows} rows and {cols} columns')
-        print(f'There are {series} series')
-        print(f'The data spans from  {start_date} to {end_date}')
+        print(f"There are {rows} rows and {cols} columns")
+        print(f"There are {series} series")
+        print(f"The data spans from  {start_date} to {end_date}")
 
         self.hierarchical_check()
         self.zero_inflated_check()
@@ -592,8 +608,8 @@ def get_timestep(df, ts_settings):
     '2 months'
 
     """
-    date_col = ts_settings['date_col']
-    series_id = ts_settings['series_id']
+    date_col = ts_settings["date_col"]
+    series_id = ts_settings["series_id"]
     df = df.copy()
 
     # Cast date column to a pandas datetime type and sort df
@@ -606,27 +622,27 @@ def get_timestep(df, ts_settings):
 
     # Logic to detect project time step and time unit
     if (60 <= median_timestep < 3600) & (median_timestep % 60 == 0):
-        project_time_unit = 'minute'
+        project_time_unit = "minute"
         project_time_step = int(median_timestep / 60)
-        df['minute'] = df[date_col].dt.minute
+        df["minute"] = df[date_col].dt.minute
     elif (3600 <= median_timestep < 86400) & (median_timestep % 3600 == 0):
-        project_time_unit = 'hour'
+        project_time_unit = "hour"
         project_time_step = int(median_timestep / 3600)
-        df['hour'] = df[date_col].dt.hour
+        df["hour"] = df[date_col].dt.hour
     elif (86400 <= median_timestep < 604800) & (median_timestep % 86400 == 0):
-        project_time_unit = 'day'
+        project_time_unit = "day"
         project_time_step = int(median_timestep / 86400)
-        df['day'] = df[date_col].dt.strftime('%A')
+        df["day"] = df[date_col].dt.strftime("%A")
     elif (604800 <= median_timestep < 2.628e6) & (median_timestep % 604800 == 0):
-        project_time_unit = 'week'
+        project_time_unit = "week"
         project_time_step = int(median_timestep / 604800)
-        df['week'] = df[date_col].dt.week
+        df["week"] = df[date_col].dt.week
     elif (median_timestep >= 2.628e6) & (median_timestep % 2.628e6 == 0):
-        project_time_unit = 'month'
+        project_time_unit = "month"
         project_time_step = int(median_timestep / 2.628e6)
-        df['month'] = df[date_col].dt.month
+        df["month"] = df[date_col].dt.month
     else:
-        raise ValueError(f'{median_timestep} seconds is not a supported timestep')
+        raise ValueError(f"{median_timestep} seconds is not a supported timestep")
 
     # print('Project Timestep: 1', project_time_unit)
 
@@ -654,16 +670,16 @@ def fill_missing_dates(df, ts_settings, freq=None):
     --------
     pandas df with inserted rows
     """
-    
-    date_col = ts_settings['date_col']
-    series_id = ts_settings['series_id']
+
+    date_col = ts_settings["date_col"]
+    series_id = ts_settings["series_id"]
     df = df.copy()
 
     df[date_col] = pd.to_datetime(df[date_col])
     df.sort_values(by=[series_id, date_col], ascending=True, inplace=True)
 
     if freq is None:
-        mapper = {'minute': 'min', 'hour': 'H', 'day': 'D', 'week': 'W', 'month': 'M'}
+        mapper = {"minute": "min", "hour": "H", "day": "D", "week": "W", "month": "M"}
         project_time_unit, project_time_step = get_timestep(df, ts_settings)
         freq = str(project_time_step) + mapper[project_time_unit]
 
@@ -695,7 +711,7 @@ def _remove_leading_zeros(df, date_col, target, threshold=5, drop=False):
     --------
     pandas df
     """
-    
+
     df[date_col] = pd.to_datetime(df[date_col])
     df_non_zero = df[(df[target] != 0) & (~pd.isnull(df[target]))]
     min_date = df_non_zero[date_col].min()
@@ -733,7 +749,7 @@ def _remove_trailing_zeros(df, date_col, target, threshold=5, drop=False):
     --------
     pandas df
     """
-    
+
     df[date_col] = pd.to_datetime(df[date_col])
     df_non_zero = df[(df[target] != 0) & (~pd.isnull(df[target]))]
     max_date = df_non_zero[date_col].max()
@@ -756,7 +772,13 @@ def _remove_trailing_zeros(df, date_col, target, threshold=5, drop=False):
 
 
 def remove_leading_and_trailing_zeros(
-    df, series_id, date_col, target, leading_threshold=5, trailing_threshold=5, drop=False
+    df,
+    series_id,
+    date_col,
+    target,
+    leading_threshold=5,
+    trailing_threshold=5,
+    drop=False,
 ):
     """
     Remove excess zeros at the beginning or end of series
@@ -793,7 +815,7 @@ def remove_leading_and_trailing_zeros(
 def _cut_series_by_rank(df, ts_settings, n=1, top=True):
     """
     Select top-n or bottom-n series by rank
-    
+
     df: pandas df
     ts_settings: dict
         Parameters for datetime DR projects
@@ -801,15 +823,15 @@ def _cut_series_by_rank(df, ts_settings, n=1, top=True):
         number of series to select
     top: bool
         Select highest (True) or lowest series (False)
-    
+
     Returns:
     --------
     pandas df
     """
-    
-    df_agg = df.groupby(ts_settings['series_id']).mean()
+
+    df_agg = df.groupby(ts_settings["series_id"]).mean()
     selected_series_names = (
-        df_agg.sort_values(by=ts_settings['target'], ascending=top).tail(n).index.values
+        df_agg.sort_values(by=ts_settings["target"], ascending=top).tail(n).index.values
     )
 
     return selected_series_names
@@ -818,7 +840,7 @@ def _cut_series_by_rank(df, ts_settings, n=1, top=True):
 def _cut_series_by_quantile(df, ts_settings, quantile=0.95, top=True):
     """
     Select top-n or bottom-n series by quantile
-    
+
     df: pandas df
     ts_settings: dict
         Parameters for datetime DR projects
@@ -826,15 +848,14 @@ def _cut_series_by_quantile(df, ts_settings, quantile=0.95, top=True):
         threshold for series to select
     top: bool
         Select highest (True) or lowest series (False)
-    
+
     Returns:
     --------
     pandas df
     """
-    
-    
-    series_id = ts_settings['series_id']
-    target = ts_settings['target']
+
+    series_id = ts_settings["series_id"]
+    target = ts_settings["target"]
 
     df_agg = df.groupby(series_id).mean()
 
@@ -858,42 +879,42 @@ def plot_series_average(df, ts_settings):
         Contains information on individual series
     ts_settings: dict
         Parameters for time series project
-    
+
     Returns:
     --------
     Plotly line plot
     """
-    date_col = ts_settings['date_col']
-    target = ts_settings['target']
+    date_col = ts_settings["date_col"]
+    target = ts_settings["target"]
 
     # Average of all series over time
     df_agg = df.groupby(date_col).mean()
-    df_agg['Date'] = pd.to_datetime(df_agg.index.values)
+    df_agg["Date"] = pd.to_datetime(df_agg.index.values)
 
-    fig = px.line(df_agg, x='Date', y=target)
-    fig.update_layout(title_text='Average of all Series')
+    fig = px.line(df_agg, x="Date", y=target)
+    fig.update_layout(title_text="Average of all Series")
     fig.show()
 
 
 def plot_individual_series(df, ts_settings, n=None, top=True):
     """
     Plot individual series on the same chart
-    
+
     df: Pandas df
         Contains information on individual series
     ts_settings: dict
         Parameters for time series project
     n: (int) number of series to plot
     top: (boolean) whether to select the top n largest or smallest series ranked by average target value
-    
+
     Returns:
     --------
     Plotly line plot
     """
-    
-    date_col = ts_settings['date_col']
-    series_id = ts_settings['series_id']
-    target = ts_settings['target']
+
+    date_col = ts_settings["date_col"]
+    series_id = ts_settings["series_id"]
+    target = ts_settings["target"]
 
     if n is None:
         n = len(df[series_id].unique())
@@ -903,6 +924,6 @@ def plot_individual_series(df, ts_settings, n=None, top=True):
 
     fig = px.line(df_subset, x=date_col, y=target, color=df_subset[series_id])
     if top is False:
-        fig.update_layout(title_text='Bottom Series By Target Over Time')
-    fig.update_layout(title_text='Top Series By Target Over Time')
+        fig.update_layout(title_text="Bottom Series By Target Over Time")
+    fig.update_layout(title_text="Top Series By Target Over Time")
     fig.show()
