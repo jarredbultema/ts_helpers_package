@@ -18,7 +18,6 @@ clean: ## Remove all temporary files
 	@rm -rf *.egg-info
 	@rm -rf pip-wheel-metadata
 	@rm -rf __pycache__
-	@rm -rf .pyc
 	@find . -type d -iname .ipynb_checkpoints -exec rm -r {} +
 
 
