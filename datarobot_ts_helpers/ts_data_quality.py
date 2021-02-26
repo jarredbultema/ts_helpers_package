@@ -496,6 +496,7 @@ class DataQualityCheck:
             'dow': 'weekly',
             'dom': 'monthly',
             'month': 'yearly',
+            'year': 'multi-year'
         }
 
         try:
@@ -512,6 +513,7 @@ class DataQualityCheck:
         df['dow'] = df[date_col].dt.dayofweek
         df['dom'] = df[date_col].dt.day
         df['month'] = df[date_col].dt.month
+        df['year'] = df[date_col].dt.year
 
         if timestep == 'minute':
             inputs = ['moh', 'hod', 'dow', 'dom', 'month']
@@ -521,6 +523,8 @@ class DataQualityCheck:
             inputs = ['dow', 'dom', 'month']
         elif timestep == 'week':
             inputs = ['month']
+        elif timestep == 'month':
+            inputs = ['month','year']
         else:
             raise ValueError('timestep has to be either minute, hour, day, week, or month')
 
@@ -621,7 +625,8 @@ def get_timestep(df, ts_settings):
         project_time_unit = 'week'
         project_time_step = int(median_timestep / 604800)
         df['week'] = df[date_col].dt.week
-    elif (median_timestep >= 2.628e6) & (median_timestep % 2.628e6 == 0):
+    elif (median_timestep >= 2.628e6) & (median_timestep / 2.628e6 <= 1.02):
+    # elif (median_timestep >= 2.628e6) & (median_timestep % 2.628e6 == 0): # original
         project_time_unit = 'month'
         project_time_step = int(median_timestep / 2.628e6)
         df['month'] = df[date_col].dt.month

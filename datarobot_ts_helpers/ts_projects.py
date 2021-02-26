@@ -1608,17 +1608,19 @@ def run_feature_selection_projects(df,
 
     results = pd.DataFrame()
     project_ranks = []
-
+    models = []
     print(f'Getting ranked models from {len(projects)} projects ...')
     for project in projects:
         for i in range(1, 11):
             model = get_ranked_model(project, model_rank=i, metric=None, data_subset='allBacktests')
             if not any(x in str(model[0]) for x in ['Blender', 'Zero', 'Baseline']):
                 project_ranks.append((project, i, model[0].id))
+                models.append(model[0])
                 break
             if i == 10:
                 print(f'{project.project_name} top-10 models may not support retraining on reduced features')
                 project_ranks.append((project, 1, model[0].id))
+                models.append(model[0])
 
     print(f'Training reduced feature lists for {len(projects)} projects ...')
     # project_ranks = [x for x in project_ranks if x[1] != 1]
@@ -1632,7 +1634,12 @@ def run_feature_selection_projects(df,
         results = results.append(data)
     
     # score backtests on models
-    models = [m.score_backtests() for m in results['Model_ID'].unique().tolist()]
+    for m in models:
+        try:
+            print(type(m))
+            m.score_backtests()
+        except:
+            print(f'Could not score {m}')
     print(f'Scoring backtests for {len(models)} models retrained with reduced features...')
         
     return results # .drop_duplicates()

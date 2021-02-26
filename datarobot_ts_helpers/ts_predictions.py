@@ -226,8 +226,8 @@ def get_or_request_predictions(
     
     series_id = ts_settings['series_id']
     date = ts_settings['date_col']
-    training_df[date] = pd.to_datetime(training_df[date]).apply(lambda x: x.date())
-    scoring_df[date] = pd.to_datetime(scoring_df[date]).apply(lambda x: x.date())
+    training_df[date] = pd.to_datetime(training_df[date])#.apply(lambda x: x.date())
+    scoring_df[date] = pd.to_datetime(scoring_df[date])#.apply(lambda x: x.date())
 
     models_to_predict_on = []
     retrain_jobs = []
@@ -270,20 +270,20 @@ def get_or_request_predictions(
         end = m.training_info['prediction_training_end_date'] # 
 #         end= dr.DatetimePartitioning.get(p.id).holdout_end_date # m.training_info['prediction_training_end_date'] # 
         if start_date is None:
-            start_date = start.date()
+            start_date = pd.to_datetime(start)
         if end_date is None:
-            end_date = end.date()
+            end_date = pd.to_datetime(end)
         if forecast_point is None:
             pred_date = data[date].min()
         else:
             pred_date = pd.to_datetime(forecast_point)
-        cutoff = (pd.to_datetime(pred_date) + pd.DateOffset(int(project_stats[project_stats['Model_ID'] == m.id]['FDW'].values[0]))).date()
+        cutoff = (pd.to_datetime(pred_date) + pd.DateOffset(int(project_stats[project_stats['Model_ID'] == m.id]['FDW'].values[0])))
 
         print('Training Data Start Date: ', start_date)
         print('Training Data End Date: ', end_date)
         print('FDW start for predictions: ', cutoff)
-        print('FDW end for predictions: ', (pred_date - pd.DateOffset(int(ts_settings['fdw_end']))).date())
-        print('Forecast point: ', pred_date.date())
+        print('FDW end for predictions: ', (pred_date - pd.DateOffset(int(ts_settings['fdw_end']))))
+        print('Forecast point: ', pred_date)
 
         if training_df is not None and data[date].min() > cutoff:
             if series is not None:

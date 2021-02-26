@@ -1,68 +1,68 @@
 import pandas as pd
 import numpy as np
-import psycopg2 as pg
+# import psycopg2 as pg
 
-def execute_query(statement, conn_string):
-    '''
-    Executes a Query on a SQL database
+# def execute_query(statement, conn_string):
+#     '''
+#     Executes a Query on a SQL database
     
-    statement: str
-        SQL query
-    conn_string: str
-        Connection string for the database of interest
+#     statement: str
+#         SQL query
+#     conn_string: str
+#         Connection string for the database of interest
         
-    Returns:
-    --------
-    output of SQL query
-    '''
+#     Returns:
+#     --------
+#     output of SQL query
+#     '''
     
-    # Construct connection string
-#     conn_string = f"host={host} user={user} dbname={dbname} password={password} sslmode={sslmode}"
-    conn = pg.connect(conn_string) 
-    print("Connection established")
+#     # Construct connection string
+# #     conn_string = f"host={host} user={user} dbname={dbname} password={password} sslmode={sslmode}"
+#     conn = pg.connect(conn_string) 
+#     print("Connection established")
 
-    try: 
-        cursor = conn.cursor()
-        cursor.execute(statement)
-        return cursor.fetchall()
-    except: 
-        return "No results to fetch"
+#     try: 
+#         cursor = conn.cursor()
+#         cursor.execute(statement)
+#         return cursor.fetchall()
+#     except: 
+#         return "No results to fetch"
     
     
-def create_df_from_query(table_name, cursor, index_col= None, select_cols= '*'):
-    '''
-    Create a Pandas DataFrame from a SQL query when you want select columns from an existing table
+# def create_df_from_query(table_name, cursor, index_col= None, select_cols= '*'):
+#     '''
+#     Create a Pandas DataFrame from a SQL query when you want select columns from an existing table
     
-    table_name: str
-        Name of table in database
-    cursor: psycopg2.extensions.cursor
-        Psycopg2 cursor object
-    index_col: str
-        Column name for index column
-    select_cols: str
-        Columns to be selected from table, must be in SQL-sytnax
+#     table_name: str
+#         Name of table in database
+#     cursor: psycopg2.extensions.cursor
+#         Psycopg2 cursor object
+#     index_col: str
+#         Column name for index column
+#     select_cols: str
+#         Columns to be selected from table, must be in SQL-sytnax
     
-    Returns:
-    --------
-    Pandas df
-    '''
+#     Returns:
+#     --------
+#     Pandas df
+#     '''
     
-    statement = f'''
-    SELECT {select_cols} 
-    from {table_name};'''
-    cursor.execute(statement)
-    out1 = cursor.fetchall()
+#     statement = f'''
+#     SELECT {select_cols} 
+#     from {table_name};'''
+#     cursor.execute(statement)
+#     out1 = cursor.fetchall()
 
-    statement2 = f"""
-    SELECT COLUMN_NAME
-    FROM information_schema.COLUMNS
-    WHERE TABLE_NAME = '{table_name}';"""
-    cursor.execute(statement2) 
-    out2 = cursor.fetchall()
-    names = [x[0] for x in out2]
+#     statement2 = f"""
+#     SELECT COLUMN_NAME
+#     FROM information_schema.COLUMNS
+#     WHERE TABLE_NAME = '{table_name}';"""
+#     cursor.execute(statement2) 
+#     out2 = cursor.fetchall()
+#     names = [x[0] for x in out2]
 
-    # create the dataframe
-    return pd.DataFrame.from_records(out1, index= index_col, columns= names) # 
+#     # create the dataframe
+#     return pd.DataFrame.from_records(out1, index= index_col, columns= names) # 
 
 def aggregate_df(df, aggregators= None, string_columns= None, numeric_columns= None, ignore_columns= None):
     '''
