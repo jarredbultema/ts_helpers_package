@@ -126,6 +126,8 @@ def create_dr_project(df, project_name, ts_settings, advanced_options= {'weights
         combined_feature_settings = settings['known_in_advance']
     elif ts_settings['do_not_derive'] is not None:
         combined_feature_settings = settings['do_not_derive']
+    else:
+        combined_feature_settings = None
 
     # Update validation and holdout duration, start, and end date
     project_time_unit, project_time_step = get_timestep(df, settings)
