@@ -2,7 +2,7 @@
 ### A library of helper scripts to support complex time-series modeling using DataRobot AutoTS software
 
 ## Authors
-#### Justin Swansburg, Jarred Bultema, Jess Lin
+#### Jarred Bultema, Justin Swansburg, Jess Lin
 
 ## Description
 #### The modeling of large scale time-series problems is possible directly within DataRobot software via the GUI or via R or Python modeling APIs. While the software is capable of modeling up to 1 million series per project and applying state of the art modeling techniques, often there is motivation to model aspects of a data science problem across multiple DataRobot projects. Motivation for this may include a desire to externally cluster similar series, apply different data manipulations or corrections, utilize different data sources, apply different differencing strategies, utilize different Feature Derivation Windows, or investigate different Forecast Distance ranges. Regardless of the reasons, internally we have found that performance can often be improved on large or complex time-series use cases by breaking a large, challenging problem into smaller pieces and modeling each of those pieces separately.
