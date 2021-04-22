@@ -33,18 +33,18 @@ def series_to_clusters(df, ts_settings, split_col='Cluster'):
 def clusters_to_series(df, ts_settings, split_col='Cluster'):
     '''
     Creates a cluster map corresponds to series within a cluster
-    
+
     df: pandas df
     ts_settings: dict
         Parameters for time series project
     split_col: str
         Column name in df to be used to subset data
-    
+
     Returns:
     --------
     dict
     '''
-    
+
     series_id = ts_settings['series_id']
 
     df = df[[series_id, split_col]].drop_duplicates().reset_index(drop=True).sort_values([split_col, series_id], ascending= [True, True])
@@ -101,7 +101,10 @@ def get_project_stats(
             stats.loc[i, 'Project_Name'] = p.project_name
             stats.loc[i, 'Project_ID'] = p.id
             stats.loc[i, split_col] = None
-            stats.loc[i, 'FD'] = p.project_name.split(project_name_char)[1].split('_FDW:')[0]
+            try:
+                stats.loc[i, 'FD'] = p.project_name.split(project_name_char)[1].split('_FDW:')[0]
+            except:
+                stats.loc[i, 'FD'] = p.project_name.split(project_name_char)[0].split('_FDW:')[0]
             stats.loc[i, 'FDW'] = p.project_name.split('_FDW:')[1].replace("_all_series","")
 
 
@@ -226,7 +229,8 @@ def get_or_request_predictions(
     
     series_id = ts_settings['series_id']
     date = ts_settings['date_col']
-    training_df[date] = pd.to_datetime(training_df[date])#.apply(lambda x: x.date())
+    if training_df is not None: # may need to add this line
+        training_df[date] = pd.to_datetime(training_df[date])#.apply(lambda x: x.date())
     scoring_df[date] = pd.to_datetime(scoring_df[date])#.apply(lambda x: x.date())
 
     models_to_predict_on = []
@@ -247,10 +251,10 @@ def get_or_request_predictions(
         if len(series) == 1:
                 series = series[0]
         elif series.sort() != series.sort():
-            print(f'There are no suitable series in {p} to for predctions')
+            print(f'There are no suitable series in {p} for predctions')
             continue
         elif len(series) == 0:
-            print(f'There are no suitable series in {p} to for predctions')
+            print(f'There are no suitable series in {p} for predctions')
             continue
         
         print('For series: ', series)
@@ -298,14 +302,15 @@ def get_or_request_predictions(
             df = data # .drop_duplicates([series_id, date])
 
         print(f'Uploading scoring dataset with {df.shape[0]} rows for Project {p.project_name}')
-        
-        if any(df[ts_settings['known_in_advance']].isnull().any(axis=1)):
-            df[ts_settings['known_in_advance']] = df[ts_settings['known_in_advance']].fillna(method= 'ffill')
+
+        if ts_settings['known_in_advance'] is not None:
             if any(df[ts_settings['known_in_advance']].isnull().any(axis=1)):
-                df[ts_settings['known_in_advance']] = df[ts_settings['known_in_advance']].fillna(method= 'bfill')
-                print('*** Missing values were detected in the KIA variables, and were filled using backward-fill ***')
-            else:
-                print('*** Missing values were detected in the KIA variables, and were filled using forward-fill ***')
+                df[ts_settings['known_in_advance']] = df[ts_settings['known_in_advance']].fillna(method= 'ffill')
+                if any(df[ts_settings['known_in_advance']].isnull().any(axis=1)):
+                    df[ts_settings['known_in_advance']] = df[ts_settings['known_in_advance']].fillna(method= 'bfill')
+                    print('*** Missing values were detected in the KIA variables, and were filled using backward-fill ***')
+                else:
+                    print('*** Missing values were detected in the KIA variables, and were filled using forward-fill ***')
 
         # only upload if necessary
         if m.project_id not in project_dataset_map:
