@@ -9,7 +9,7 @@ with open('Requirements.txt') as f:
 
 setup(
     name="datarobot_ts_helpers", 
-    version="0.1.3beta1",
+    version="0.1.4beta1",
     author="Jarred Bultema",
     author_email="jarred.bultema@datarobot.com",
     description="A package with helper scripts for complex DataRobot AutoTS use cases",
