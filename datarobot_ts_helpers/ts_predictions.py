@@ -315,7 +315,7 @@ def get_or_request_predictions(
         # only upload if necessary
         if m.project_id not in project_dataset_map:
             p.unlock_holdout()
-            pred_dataset = p.upload_dataset(df, forecast_point=forecast_point)
+            pred_dataset = p.upload_dataset(df, forecast_point=forecast_point, max_wait= 1500)
             project_dataset_map[m.project_id] = pred_dataset.id
 
         if retrain:
@@ -336,14 +336,14 @@ def get_or_request_predictions(
             models_to_predict_on.append(m)
 
         for job in retrain_jobs:
-            models_to_predict_on.append(job.get_result_when_complete(max_wait=10000))
+            models_to_predict_on.append(job.get_result_when_complete(max_wait=1500))
 
     for model in models_to_predict_on:
         p = dr.Project.get(model.project_id)
         print(f'Getting predictions for M{model.model_number} in Project {p.project_name}')
         predict_jobs.append(model.request_predictions(project_dataset_map[model.project_id]))
 
-    preds = [pred_job.get_result_when_complete() for pred_job in predict_jobs]
+    preds = [pred_job.get_result_when_complete(max_wait= 1500) for pred_job in predict_jobs]
 
     predictions = pd.DataFrame()
     for i in range(len(preds)):
@@ -352,6 +352,158 @@ def get_or_request_predictions(
     print('\nFinished computing and downloading predictions')
     return predictions
 
+
+def score_top_models_from_project(project,
+                                  ts_settings,
+                                  scoring_df,
+                                  training_df=None,
+                                  n_models=1,
+                                  deployments=None,
+                                  project_stats=None,
+                                  data_subset='allBacktests',
+                                  include_blenders=True,
+                                  metric=None,
+                                  forecast_point=None
+                                  ):
+    '''
+    Doc string TBC
+    '''
+
+    # python-2 style logic checks for object-type
+    assert data_subset in [
+        'backtest_1',
+        'allBacktests',
+        'holdout',
+    ], 'data_subset must be either backtest_1, allBacktests, or holdout'
+    if n_models is not None:
+        assert isinstance(n_models, int), 'n_models must be an int'
+    if n_models is not None:
+        assert n_models >= 1, 'n_models must be greater than or equal to 1'
+    assert isinstance(include_blenders, bool), 'include_blenders must be a boolean'
+
+    # retrieve top-n models
+    if n_models:
+        models = ts.get_top_models_from_project(project=project, n_models=n_models, data_subset=data_subset,
+                                                include_blenders=include_blenders, metric=metric)
+
+    # alternatively, use deployments instead
+    if deployments is not None:
+        models = []
+        for d in deployments:
+            print(f'Accessing model from {d.label} deployment')
+            models.append(dr.DatetimeModel.get(project=d.model['project_id'], model_id=d.model['id']))
+
+    # obtain predictions
+    all_preds = pd.DataFrame()
+    # not sure I need this loop, I think I can just pass 'models'
+    # but this might be better for error handling
+
+    for i, m in enumerate(models):
+
+        print(f'*** Getting predictions from {i + 1} of {len(models)} models in {project.project_name} ***')
+
+        # need to account for all_series vs segemented projects, the internally-called functions expect segmented projects
+        # need to spoof this project_stats dict for all_series projects
+        if project_stats is None:
+            tmp_stats = dict()
+            tmp_stats['Project_Name'] = project.project_name
+            tmp_stats['Project_ID'] = project.id
+            tmp_stats['Cluster'] = np.nan
+            tmp_stats['FD'] = project.project_name.split('_FD:')[1].split('_FDW:')[0]
+            tmp_stats['FDW'] = project.project_name.split('_FD:')[1].split('_FDW:')[1].split("_")[0]
+            tmp_stats['Model_Type'] = m.model_type
+            tmp_stats['Model_ID'] = m.id
+            tmp_stats['Series'] = [scoring_df[ts_settings['series_id']].values]
+            tmp_stats = pd.DataFrame(tmp_stats)
+
+        # for segmented projects, we need to duplicate the projects_stats with rows for all duplicate segments with different models
+        else:
+            tmp_stats = stats[stats['Project_ID'] == project.id].copy()
+            tmp_stats['Model_Type'] = m.model_type
+            tmp_stats['Model_ID'] = m.id
+
+        try:
+            tmp_preds = ts.get_or_request_predictions(models=[m], scoring_df=scoring_df, training_df=training_df,
+                                                      ts_settings=ts_settings, project_stats=tmp_stats,
+                                                      forecast_point=forecast_point)
+            tmp_preds['Project Name'] = project.project_name
+            tmp_preds['Model'] = m.model_type
+            tmp_preds['Model_ID'] = m.id
+            tmp_preds['Status'] = 'Success'
+            all_preds = all_preds.append(tmp_preds)
+
+        except dr.errors.ClientError or dr.errors.JobAlreadyRequested as e:
+            print(f'Model {m} failed to process predictions:\n', e)
+            tmp_preds['Project Name'] = project.project_name
+            tmp_preds['Model'] = m.model_type
+            tmp_preds['Status'] = 'Failed'
+            all_preds = all_preds.append(tmp_preds)
+
+    return all_preds
+
+
+def score_top_models_from_projects(projects,
+                                   ts_settings,
+                                   scoring_df,
+                                   training_df=None,
+                                   n_models=1,
+                                   deployments=None,
+                                   project_stats=None,
+                                   data_subset='allBacktests',
+                                   include_blenders=True,
+                                   metric=None,
+                                   forecast_point=None
+                                   ):
+    '''
+    Doc string TBC
+    '''
+
+    # python-2 style logic checks for object-type
+    assert data_subset in [
+        'backtest_1',
+        'allBacktests',
+        'holdout',
+    ], 'data_subset must be either backtest_1, allBacktests, or holdout'
+    if n_models is not None:
+        assert isinstance(n_models, int), 'n_models must be an int'
+    if n_models is not None:
+        assert n_models >= 1, 'n_models must be greater than or equal to 1'
+    assert isinstance(include_blenders, bool), 'include_blenders must be a boolean'
+
+    combined_predictions = pd.DataFrame()
+
+    if projects is not None:
+        for p in projects:
+            project_preds = score_top_models_from_project(project=p,
+                                                          ts_settings=ts_settings,
+                                                          scoring_df=scoring_df,
+                                                          training_df=training_df,
+                                                          n_models=n_models,
+                                                          deployments=deployments,
+                                                          project_stats=project_stats,
+                                                          data_subset=data_subset,
+                                                          include_blenders=include_blenders,
+                                                          metric=metric,
+                                                          forecast_point=forecast_point
+                                                          )
+            combined_predictions = combined_predictions.append(project_preds)
+    else:
+        for d in deployments:
+            project_preds = score_top_models_from_project(project=None,
+                                                          ts_settings=ts_settings,
+                                                          scoring_df=scoring_df,
+                                                          training_df=training_df,
+                                                          n_models=n_models,
+                                                          deployments=d,
+                                                          project_stats=project_stats,
+                                                          data_subset=data_subset,
+                                                          include_blenders=include_blenders,
+                                                          metric=metric,
+                                                          forecast_point=forecast_point
+                                                          )
+            combined_predictions = combined_predictions.append(project_preds)
+
+    return combined_predictions
 
 
 def merge_preds_and_actuals(preds, actuals, ts_settings):
