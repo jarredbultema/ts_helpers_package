@@ -22,6 +22,34 @@ from .ts_projects import get_preds_and_actuals
 # Series Clustering
 ####################
 
+def add_cluster_labels(df, series_id, target, nlags=5, alpha=0.05, scale=True, scale_method='standard'):
+    """
+    Add cluster labels to time series data
+
+    df: pandas df
+    series_id: str
+        Name of column containing series ids
+    target: str
+        Name of column containing target values
+    nlags: int
+        Number of lags to use in pacf
+    alpha: float
+        Significance level
+    scale: bool
+        Scale data
+    scale_method: str
+        Method for scaling data
+
+    Returns:
+    --------
+    pandas df
+    """
+    df = _split_series(df, series_id, target)
+    df = _get_pacf_coefs(df, target, nlags, alpha, scale, scale_method)
+    df = _get_cluster_labels(df, target, nlags)
+
+    return df
+
 
 def _split_series(df, series_id, target, by='quantiles', cuts=5, split_col='Cluster'):
     """
